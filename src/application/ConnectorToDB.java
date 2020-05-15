@@ -20,7 +20,7 @@ public class ConnectorToDB {
 		try {
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
 			connection = DriverManager.getConnection(url , userName , pas);
-			PreparedStatement ps = connection.prepareStatement("insert into 'order_processing_system'.'publisher' values('zoom','124Th behind chair factory','2124-5676-8798');") ; 
+			PreparedStatement ps = connection.prepareStatement("insert into order_processing_system.publisher values('zoooom','124Th behind chair factory','2124-5676-8798');") ; 
 			int status = ps.executeUpdate(); 
 			if ( status != 0 ) {
 		
