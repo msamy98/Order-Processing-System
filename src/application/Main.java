@@ -18,6 +18,9 @@ public class Main extends Application {
 			//scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
 			primaryStage.show();
+			
+			ConnectorToDB c = new ConnectorToDB() ; 
+			c.conToDp(); 
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
