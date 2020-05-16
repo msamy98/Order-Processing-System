@@ -16,10 +16,8 @@ public class Database {
 	
 
 	public void databaseConnector () throws InstantiationException,IllegalAccessException,ClassNotFoundException,SQLException {
-		
 			Class.forName("com.mysql.jdbc.Driver");
 			connection = DriverManager.getConnection(url , userName , password);
-		
 	}
 	
 	public void databaseClose() throws SQLException{
@@ -27,13 +25,13 @@ public class Database {
 			connection.close();
 		}
 	}
-	
-	public int excuteUpdateQuery() throws SQLException{
+	/***to execute the update queries as update and delete returning the status of the operation***/
+	public int executeUpdateQuery() throws SQLException{
 		PreparedStatement ps = connection.prepareStatement(query);
 		return ps.executeUpdate();
 	}
-	
-	public ResultSet executeRetriveQuery() throws SQLException {
+	/***to execute the retrieve query as select returning the data***/
+	public ResultSet executeRetrieveQuery() throws SQLException {
 		Statement stmt = connection.createStatement();
 		return stmt.executeQuery(query);
 	}

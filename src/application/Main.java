@@ -1,6 +1,9 @@
 package application;
 	
 import java.sql.*;
+
+import com.mysql.jdbc.ResultSetRow;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
@@ -24,14 +27,13 @@ public class Main extends Application {
 			bookstore.databaseConnector(); 
 			
 			
-			bookstore.setQuery("INSERT INTO order_processing_system.publisher VALUES(\'Ziad Taha\', \'Ard El Abtal\', \'011-5537-6877\');");
-			bookstore.excuteUpdateQuery();
+			//bookstore.setQuery("INSERT INTO order_processing_system.publisher VALUES(\'Ziad Taha\', \'Ard El Abtal\', \'011-5537-6877\');");
+			//bookstore.excuteUpdateQuery();
 			//bookstore.setQuery("DELETE FROM order_processing_system.publisher WHERE PUBLISHER_NAME = \'Ziad Taha\';");
 			//bookstore.excuteUpdateQuery();
 			bookstore.setQuery("SELECT * FROM order_processing_system.publisher;");
-			ResultSet result = bookstore.executeRetriveQuery();
+			ResultSet result = bookstore.executeRetrieveQuery();
 			ResultSetMetaData metaData = result.getMetaData();
-			
 			
 			while(result.next()) {
 				StringBuilder temp = new StringBuilder();
