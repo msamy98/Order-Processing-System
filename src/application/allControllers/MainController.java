@@ -30,22 +30,23 @@ public class MainController {
 
     @FXML
     void Buy_screen(ActionEvent event) {
-    	FxmlLoader obj = new FxmlLoader() ; 
-    	Pane p = obj.getView("BuyGui") ; 
+    	FxmlLoader obj = new FxmlLoader() ;
+
+    	Pane p = obj.getView(getClass().getResource("/BuyGui.fxml") );
     	mainBorderPane.setCenter(p);
     }
 
     @FXML
     void edit_info_screen(ActionEvent event) {
-    	FxmlLoader obj = new FxmlLoader() ; 
-    	Pane p = obj.getView("presonalInfoGui") ; 
+    	FxmlLoader obj = new FxmlLoader() ;
+    	Pane p = obj.getView(getClass().getResource("/presonalInfoGui.fxml")) ;
     	mainBorderPane.setCenter(p);
     }
 
     @FXML
     void pro_screen(ActionEvent event) {
-    	/*FxmlLoader obj = new FxmlLoader() ; 
-    	Pane p = obj.getView("presonalInfoGui") ; 
+    	/*FxmlLoader obj = new FxmlLoader() ;
+    	Pane p = obj.getView("presonalInfoGui") ;
     	mainBorderPane.setCenter(p);*/
     }
 
