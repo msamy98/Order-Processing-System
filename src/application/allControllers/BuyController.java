@@ -1,4 +1,4 @@
-package application;
+package application.allControllers;
 
 
 /**
@@ -14,7 +14,7 @@ import javafx.scene.control.TextField;
 import javafx.event.ActionEvent;
 
 
-	public class CustomController  {
+	public class BuyController  {
 
 	    @FXML // fx:id="log_out_btn"
 	    private Button log_out_btn; // Value injected by FXMLLoader
