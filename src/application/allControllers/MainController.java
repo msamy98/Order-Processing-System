@@ -42,6 +42,9 @@ public class MainController {
     @FXML // fx:id="porBt"
     public Button porBt; // Value injected by FXMLLoader
 
+    
+    @FXML // fx:id="placeBt"
+    public Button confirmBt;
 
      private User user;
      private Stage myStage;
@@ -136,6 +139,22 @@ public class MainController {
 			e.printStackTrace();
 		}
     }
+    
+    
+    @FXML
+    void confirm_book_orders(ActionEvent event) {
+    	FXMLLoader loader = new FXMLLoader(getClass().getResource("/ConfirmGui.fxml"));
+    	Pane p ;
+    	try {
+    		p = loader.load();
+    		ConfirmController conController = loader.getController();
+    		conController.setMyStage(myStage);
+    		mainBorderPane.setCenter(p);
+    	}catch (IOException e) {
+			e.printStackTrace();
+		}
+    }
+    
     public Stage getMyStage()
     {
     	return myStage;
