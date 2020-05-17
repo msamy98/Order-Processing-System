@@ -41,7 +41,7 @@ import javafx.event.ActionEvent;
 	    private Button del_btn; // Value injected by FXMLLoader
 
 	    @FXML // fx:id="search_cat"
-	    private ComboBox<?> search_cat; // Value injected by FXMLLoader
+	    private ComboBox<String> search_cat; // Value injected by FXMLLoader
 
 	    @FXML // fx:id="cart_table"
 	    private TableView<Book> cart_table; // Value injected by FXMLLoader
@@ -122,42 +122,74 @@ import javafx.event.ActionEvent;
 
 		public void setStage(Stage myStage) {
 			this.myStage = myStage;
+
+			setupSearchBooksTable();
+
+			puCartTable();
+          	ObservableList<String> catList=FXCollections.observableArrayList();
+          	catList.add("ISBN");
+          	catList.add("title");
+          	catList.add("publisher_name");
+          	catList.add("publishing_year");
+          	catList.add("price");
+          	catList.add("book_catagory");
+          	catList.add("quantity");
+          	search_cat.setItems(catList);
+			search_cat.setValue("ISBN");
+
+
+
+	        quantity_text.textProperty().addListener(new ChangeListener<String>() {
+	            @Override
+	            public void changed(ObservableValue<? extends String> observable, String oldValue,
+	                String newValue) {
+	                if (!newValue.matches("\\d*")) {
+	                    quantity_text.setText(newValue.replaceAll("[^\\d]", ""));
+	                }
+	            }
+	        });
+
+
+		}
+		public void setupSearchBooksTable()
+		{
 			// book search table
 
-			books_search = FXCollections.observableArrayList();
-			book_search_table.setItems(books_search);
-			TableColumn ISBNCol = new TableColumn("ISBN");
-	        ISBNCol.setCellValueFactory(new PropertyValueFactory("ISBN"));
+						books_search = FXCollections.observableArrayList();
+						book_search_table.setItems(books_search);
+						TableColumn ISBNCol = new TableColumn("ISBN");
+				        ISBNCol.setCellValueFactory(new PropertyValueFactory("ISBN"));
 
-			TableColumn titleCol = new TableColumn("Title");
-	        titleCol.setCellValueFactory(new PropertyValueFactory("title"));
+						TableColumn titleCol = new TableColumn("Title");
+				        titleCol.setCellValueFactory(new PropertyValueFactory("title"));
 
-	        TableColumn publisherCol = new TableColumn("Publisher");
-	        publisherCol.setCellValueFactory(new PropertyValueFactory("publisherName"));
+				        TableColumn publisherCol = new TableColumn("Publisher");
+				        publisherCol.setCellValueFactory(new PropertyValueFactory("publisherName"));
 
-	        TableColumn priceCol = new TableColumn("Price");
-	        priceCol.setCellValueFactory(new PropertyValueFactory("price"));
+				        TableColumn priceCol = new TableColumn("Price");
+				        priceCol.setCellValueFactory(new PropertyValueFactory("price"));
 
-	        TableColumn catCol = new TableColumn("Book Category");
-	        catCol.setCellValueFactory(new PropertyValueFactory("bookCategory"));
+				        TableColumn catCol = new TableColumn("Book Category");
+				        catCol.setCellValueFactory(new PropertyValueFactory("bookCategory"));
 
-	        TableColumn quantityCol = new TableColumn("Quantity");
-	        quantityCol.setCellValueFactory(new PropertyValueFactory("quantity"));
-
-
-
-	        List<TableColumn<Book,String>> columns = new ArrayList<TableColumn<Book,String>>();
-	        columns.add(ISBNCol);
-	        columns.add(titleCol);
-	        columns.add(publisherCol);
-	        columns.add(priceCol);
-	        columns.add(quantityCol);
+				        TableColumn quantityCol = new TableColumn("Quantity");
+				        quantityCol.setCellValueFactory(new PropertyValueFactory("quantity"));
 
 
-	        book_search_table.getColumns().setAll(columns);
+
+				        List<TableColumn<Book,String>> columns = new ArrayList<TableColumn<Book,String>>();
+				        columns.add(ISBNCol);
+				        columns.add(titleCol);
+				        columns.add(publisherCol);
+				        columns.add(priceCol);
+				        columns.add(quantityCol);
 
 
-	        //cart table
+				        book_search_table.getColumns().setAll(columns);
+		}
+		public void puCartTable()
+		{
+			//cart table
 	        cart =FXCollections.observableArrayList();
 	        cart_table.setItems(cart);
 	        List<TableColumn<Book,String>> columnsCart =new ArrayList<TableColumn<Book,String>>();
@@ -182,18 +214,6 @@ import javafx.event.ActionEvent;
 	        columnsCart.add(cartCol);
 
 	        cart_table.getColumns().setAll(columnsCart);
-
-	        quantity_text.textProperty().addListener(new ChangeListener<String>() {
-	            @Override
-	            public void changed(ObservableValue<? extends String> observable, String oldValue,
-	                String newValue) {
-	                if (!newValue.matches("\\d*")) {
-	                    quantity_text.setText(newValue.replaceAll("[^\\d]", ""));
-	                }
-	            }
-	        });
-
-
 		}
 
 
