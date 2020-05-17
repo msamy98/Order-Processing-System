@@ -7,7 +7,7 @@ import java.sql.*;
 public class Database {
 	
 	static Connection connection = null ;
-	static String databaseName = "" ; 
+	static String databaseName = "order_processing_system" ; 
 	static String url = "jdbc:mysql://localhost/" + databaseName + "?autoReconnect=true&useSSL=false";
 	static String userName = "manger" ; 
 	static String password = "123456mng" ; 

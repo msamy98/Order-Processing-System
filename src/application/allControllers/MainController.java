@@ -36,6 +36,12 @@ public class MainController {
     @FXML
     public Button porBt;
     
+    @FXML
+    public Button modify;
+    
+    @FXML
+    public Button placeBt;
+    
      private User user;
      private Stage myStage;
      
@@ -79,6 +85,12 @@ public class MainController {
 			e.printStackTrace();
 		}
     	
+    }
+    @FXML
+    void modifyBooks(ActionEvent event) {
+    	FxmlLoader obj = new FxmlLoader() ; 
+    	Pane p = obj.getView(getClass().getResource("/ModifingBooks.fxml")) ; 
+    	mainBorderPane.setCenter(p);
     }
     public Stage getMyStage()
     {

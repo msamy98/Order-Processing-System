@@ -32,6 +32,16 @@
                         <Insets top="10.0" />
                      </VBox.margin>
                   </Button>
+                  <Button fx:id="placeBt" mnemonicParsing="false" prefHeight="31.0" prefWidth="128.0" text="place">
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </Button>
+                  <Button fx:id="modify" mnemonicParsing="false" onAction="#modifyBooks" prefHeight="31.0" prefWidth="128.0" text="Modify Books">
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </Button>
                </children>
                <BorderPane.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />

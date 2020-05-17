@@ -30,6 +30,7 @@ public class SignInController {
 
     @FXML
     private Hyperlink sign_up_link;
+    
 
     private Stage myStage;
 
@@ -52,11 +53,15 @@ public class SignInController {
 	    				Manger manger = new Manger(result);
 	    				mainController.setUser(manger);
 	    				mainController.porBt.setVisible(true);
+	    				mainController.placeBt.setVisible(true);
+	    				mainController.modify.setVisible(true);
 	    			}
 	    			else {
 	    				User customer = new User(result);
 	    				mainController.setUser(customer);
 	    				mainController.porBt.setVisible(false);
+	    				mainController.placeBt.setVisible(false);
+	    				mainController.modify.setVisible(false);
 	    			}
 					
 					myStage.setTitle("system");
