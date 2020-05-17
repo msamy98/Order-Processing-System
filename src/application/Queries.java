@@ -30,7 +30,7 @@ public class Queries {
 	
 	public String PlaceSearchQuery (String title) {
 		
-		String s = " select isbn , title , publisher_name , quantity , price  \r\n" + 
+		String s = " select isbn , title , publisher_name ,  price  , quantity   \r\n" + 
 				" from order_processing_system.book_orders , order_processing_system.book \r\n" + 
 				" where place = 0 and book_orders.isbn = book.isbn " ; 
 		
@@ -54,7 +54,7 @@ public class Queries {
 	
 	public String ConfirmSearchQuery (String title) {
 		
-		String s = " select isbn , title , publisher_name , quantity , price  \r\n" + 
+		String s = " select isbn , title , publisher_name ,  price  , quantity   \r\n" + 
 				" from order_processing_system.book_orders , order_processing_system.book\r\n" + 
 				" where place = 1 and book_orders.isbn = book.isbn " ; 
 		
