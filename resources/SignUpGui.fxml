@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.allControllers.SignUpController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.allControllers.SignUpController">
    <children>
       <VBox layoutX="3.0" layoutY="72.0" prefHeight="374.0" prefWidth="394.0">
          <children>
@@ -102,5 +102,6 @@
          </padding>
       </VBox>
       <Button fx:id="sign_up_btn" layoutX="168.0" layoutY="462.0" mnemonicParsing="false" onAction="#sign_up" text="sign up" />
+      <Label fx:id="error_msg" layoutX="182.0" layoutY="515.0" textFill="RED" visible="false" />
    </children>
 </AnchorPane>

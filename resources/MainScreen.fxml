@@ -6,13 +6,13 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane fx:id="Archo" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.allControllers.MainController">
+<AnchorPane fx:id="Archo" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.allControllers.MainController">
    <children>
       <BorderPane fx:id="mainBorderPane" prefHeight="400.0" prefWidth="650.0">
          <left>
             <VBox prefHeight="400.0" prefWidth="121.0" BorderPane.alignment="CENTER">
                <children>
-                  <Button fx:id="logOutBt" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#edit_info_screen" prefHeight="31.0" prefWidth="128.0" text="log out">
+                  <Button fx:id="logOutBt" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#on_logout" prefHeight="31.0" prefWidth="128.0" text="log out">
                      <VBox.margin>
                         <Insets top="10.0" />
                      </VBox.margin>
