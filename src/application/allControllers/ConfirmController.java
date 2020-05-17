@@ -32,25 +32,25 @@ public class ConfirmController {
 
     @FXML
     private Button searchBt;
-    
-    private Database db ; 
-    
+
+    private Database db ;
+
     private Stage myStage;
-    
+
     private ObservableList<Book_order> confirmList;
-    
- 
+
+
     @FXML
     void doingSearch(ActionEvent event) {
-    	
+
     	if (SearchText.getText() != "" ) {
     		try {
 				db.databaseConnector();
-				Queries q = new Queries() ; 
+				Queries q = new Queries() ;
 				db.setQuery(q.ConfirmSearchQuery(SearchText.getText()));
 				ResultSet r = db.executeRetrieveQuery();
-				
-				
+
+
 			} catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -61,14 +61,14 @@ public class ConfirmController {
 
     @FXML
     void updateConfirm(ActionEvent event) {
-    	/* get selected insb */ 
-    	String isbn = "" ; 
+    	/* get selected insb */
+    	String isbn = "" ;
     	if (isbn != "" ) {
     		try {
 				db.databaseConnector();
-				Queries q = new Queries() ; 
+				Queries q = new Queries() ;
 				db.setQuery(q.ConfirmUpdateQuert(isbn));
-				int ok = db.executeUpdateQuery() ; 
+				int ok = db.executeUpdateQuery() ;
 				if (ok != 0 )
 					System.out.println("done");
 				else {
@@ -86,13 +86,13 @@ public class ConfirmController {
 	}
 
 	public void setMyStage(Stage myStage) {
-		
+
 		this.myStage = myStage;
 		db = new Database() ;
-		
+
 		confirmList = FXCollections.observableArrayList();
     	TableOfOrder.setItems(confirmList);
-    	
+
         List<TableColumn<Book_order,String>> columnsCart =new ArrayList<TableColumn<Book_order,String>>();
         TableColumn ISBNColCart = new TableColumn("ISBN");
         ISBNColCart.setCellValueFactory(new PropertyValueFactory("ISBN"));
@@ -102,25 +102,25 @@ public class ConfirmController {
 
         TableColumn publisherColCart = new TableColumn("Publisher");
         publisherColCart.setCellValueFactory(new PropertyValueFactory("publisherName"));
-        
-      
+
+
         TableColumn priceColCart = new TableColumn("Price");
         priceColCart.setCellValueFactory(new PropertyValueFactory("price"));
-        
+
         TableColumn quan = new TableColumn("quantity");
         quan.setCellValueFactory(new PropertyValueFactory("quantity"));
 
 
 
-       
+
         columnsCart.add(ISBNColCart);
         columnsCart.add(titleColCart);
-        columnsCart.add(priceColCart);
+        columnsCart.add(publisherColCart);
         columnsCart.add(priceColCart);
         columnsCart.add(quan);
 
         TableOfOrder.getColumns().setAll(columnsCart);
-		
+
 	}
 
 }

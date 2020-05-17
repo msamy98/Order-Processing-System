@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 public class EditPersonalInfoController {
 
@@ -38,6 +39,8 @@ public class EditPersonalInfoController {
     @FXML
     private Button quit_btn;
 
+    private Stage myStage;
+
     @FXML
     void quit(ActionEvent event) {
 
@@ -46,6 +49,15 @@ public class EditPersonalInfoController {
     @FXML
     void save_edits(ActionEvent event) {
 
+    }
+    public Stage getMyStage()
+    {
+    	return myStage;
+    }
+
+    public void  setStage(Stage stage)
+    {
+    	myStage =stage;
     }
 
 }

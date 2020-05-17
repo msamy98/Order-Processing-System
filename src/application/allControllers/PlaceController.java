@@ -38,14 +38,14 @@ public class PlaceController {
     private Database db ;
 
     private Stage myStage;
-    
+
     private ObservableList<Book_order> placeList;
 
-    
+
 
     @FXML
     void doingSearch(ActionEvent event) {
-    	
+
     	//System.out.println(placeSearchText.getText());
 
     	if ( !placeSearchText.getText().trim().isEmpty()  && placeSearchText.getText() != null) {
@@ -92,14 +92,14 @@ public class PlaceController {
 
     public void  setStage(Stage stage)
     {
-    	 //isbn , title , publisher_name , price , quan 
+    	 //isbn , title , publisher_name , price , quan
     	this.myStage =stage;
-    	
+
     	db = new Database() ;
-    	
+
     	placeList = FXCollections.observableArrayList();
     	TableOfOrder.setItems(placeList);
-    	
+
         List<TableColumn<Book_order,String>> columnsCart =new ArrayList<TableColumn<Book_order,String>>();
         TableColumn ISBNColCart = new TableColumn("ISBN");
         ISBNColCart.setCellValueFactory(new PropertyValueFactory("ISBN"));
@@ -109,20 +109,20 @@ public class PlaceController {
 
         TableColumn publisherColCart = new TableColumn("Publisher");
         publisherColCart.setCellValueFactory(new PropertyValueFactory("publisherName"));
-        
-      
+
+
         TableColumn priceColCart = new TableColumn("Price");
         priceColCart.setCellValueFactory(new PropertyValueFactory("price"));
-        
+
         TableColumn quan = new TableColumn("quantity");
         quan.setCellValueFactory(new PropertyValueFactory("quantity"));
 
 
 
-       
+
         columnsCart.add(ISBNColCart);
         columnsCart.add(titleColCart);
-        columnsCart.add(priceColCart);
+        columnsCart.add(publisherColCart);
         columnsCart.add(priceColCart);
         columnsCart.add(quan);
 
