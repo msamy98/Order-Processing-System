@@ -18,56 +18,79 @@ import javafx.stage.Stage;
 
 public class MainController {
 
-    @FXML
-    private AnchorPane Archo;
+	@FXML // fx:id="Archo"
+    private AnchorPane Archo; // Value injected by FXMLLoader
 
-    @FXML
-    private BorderPane mainBorderPane;
+    @FXML // fx:id="mainBorderPane"
+    private BorderPane mainBorderPane; // Value injected by FXMLLoader
 
-    @FXML
-    private Button logOutBt;
+    @FXML // fx:id="modify"
+    public Button modify; // Value injected by FXMLLoader
 
-    @FXML
-    private Button editInfoBut;
+    @FXML // fx:id="placeBt"
+    public Button placeBt; // Value injected by FXMLLoader
 
-    @FXML
-    private Button bookSearch;
+    @FXML // fx:id="bookSearch"
+    private Button bookSearch; // Value injected by FXMLLoader
 
-    @FXML
-    public Button porBt;
-    
-    @FXML
-    public Button modify;
-    
-    @FXML
-    public Button placeBt;
-    
+    @FXML // fx:id="editInfoBut"
+    private Button editInfoBut; // Value injected by FXMLLoader
+
+    @FXML // fx:id="logOutBt"
+    private Button logOutBt; // Value injected by FXMLLoader
+
+    @FXML // fx:id="porBt"
+    public Button porBt; // Value injected by FXMLLoader
+
+
      private User user;
      private Stage myStage;
-     
+
      public void setUser(User user) {
     	 this.user = user;
      }
     @FXML
     void Buy_screen(ActionEvent event) {
-    	
-    	FxmlLoader obj = new FxmlLoader() ; 
-    	Pane p = obj.getView(getClass().getResource("/BuyGui.fxml") ); 
-    	mainBorderPane.setCenter(p);
+
+
+    	FXMLLoader loader = new FXMLLoader(getClass().getResource("/BuyGui.fxml"));
+    	Pane p ;
+    	try {
+    		p = loader.load();
+    		BuyController buyController = loader.getController();
+    		buyController.setStage(myStage);
+    		mainBorderPane.setCenter(p);
+    	}catch (IOException e) {
+			e.printStackTrace();
+		}
     }
 
     @FXML
     void edit_info_screen(ActionEvent event) {
-    	FxmlLoader obj = new FxmlLoader() ; 
-    	Pane p = obj.getView(getClass().getResource("/presonalInfoGui.fxml")) ; 
-    	mainBorderPane.setCenter(p);
+    	FXMLLoader loader = new FXMLLoader(getClass().getResource("/presonalInfoGui.fxml"));
+    	Pane p ;
+    	try {
+    		p = loader.load();
+    		BuyController buyController = loader.getController();
+    		buyController.setStage(myStage);
+    		mainBorderPane.setCenter(p);
+    	}catch (IOException e) {
+			e.printStackTrace();
+		}
     }
 
     @FXML
     void pro_screen(ActionEvent event) {
-    	/*FxmlLoader obj = new FxmlLoader() ; 
-    	Pane p = obj.getView("presonalInfoGui") ; 
-    	mainBorderPane.setCenter(p);*/
+    	FXMLLoader loader = new FXMLLoader(getClass().getResource("/Promotion.fxml"));
+    	Pane p ;
+    	try {
+    		p = loader.load();
+    		PromotionController controller = loader.getController();
+    		controller.setStage(myStage);
+    		mainBorderPane.setCenter(p);
+    	}catch (IOException e) {
+			e.printStackTrace();
+		}
     }
     @FXML
     void on_logout(ActionEvent event) {
@@ -84,13 +107,34 @@ public class MainController {
     	}catch (IOException e) {
 			e.printStackTrace();
 		}
-    	
+
     }
     @FXML
+    void place_book_orders(ActionEvent event) {
+    	FXMLLoader loader = new FXMLLoader(getClass().getResource("/PlaceGui.fxml"));
+    	Pane p ;
+    	try {
+    		p = loader.load();
+    		PlaceController placeController = loader.getController();
+    		placeController.setStage(myStage);
+    		mainBorderPane.setCenter(p);
+    	}catch (IOException e) {
+			e.printStackTrace();
+		}
+    }
+
+    @FXML
     void modifyBooks(ActionEvent event) {
-    	FxmlLoader obj = new FxmlLoader() ; 
-    	Pane p = obj.getView(getClass().getResource("/ModifingBooks.fxml")) ; 
-    	mainBorderPane.setCenter(p);
+    	FXMLLoader loader = new FXMLLoader(getClass().getResource("/ModifingBooks.fxml"));
+    	Pane p ;
+    	try {
+    		p = loader.load();
+    		ModifingBooks modifingBooks = loader.getController();
+    		modifingBooks.setStage(myStage);
+    		mainBorderPane.setCenter(p);
+    	}catch (IOException e) {
+			e.printStackTrace();
+		}
     }
     public Stage getMyStage()
     {

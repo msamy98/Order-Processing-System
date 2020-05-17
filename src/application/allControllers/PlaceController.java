@@ -2,7 +2,6 @@ package application.allControllers;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
 
 import application.Database;
 import application.Queries;
@@ -12,61 +11,57 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-public class PromotionController {
 
-
-
-    @FXML
-    private TextField userSearchText;
+public class PlaceController {
 
     @FXML
-    private Button PromoteBt;
+    private TableView<?> TableOfOrder;
 
     @FXML
-    private Button userNameSearchBt;
-
+    private Button placeBt;
 
     @FXML
-    private TableView<?> userTable;
+    private TextField placeSearchText;
 
+    @FXML
+    private Button searchBt;
 
     private Database db ;
 
     private Stage myStage;
 
-
-
+    public PlaceController() {
+		// TODO Auto-generated constructor stub
+    	db = new Database() ;
+	}
 
     @FXML
-    void searchInUser(ActionEvent event) {
-    	if (userSearchText.getText() != "") {
+    void doingSearch(ActionEvent event) {
+
+    	if (placeSearchText.getText() != "" ) {
     		try {
-    			db.databaseConnector();
+				db.databaseConnector();
 				Queries q = new Queries() ;
-				String s = q.promotionSearchQuery(userSearchText.getText()) ;
-				db.setQuery(s) ;
-				ResultSet r = db.executeRetrieveQuery() ;
-
-
+				db.setQuery(q.PlaceSearchQuery(placeSearchText.getText()));
+				ResultSet r = db.executeRetrieveQuery();
 
 
 			} catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-
     	}
     }
 
     @FXML
-    void udateUserStatus(ActionEvent event) {
-    	/* get selected inbn */
-    	String userName = "" ;
-    	if (userName != "" ) {
+    void updatePlace(ActionEvent event) {
+    	/* get selected insb */
+    	String isbn = "" ;
+    	if (isbn != "" ) {
     		try {
 				db.databaseConnector();
 				Queries q = new Queries() ;
-				db.setQuery(q.promtionUpdateQuery(userName));
+				db.setQuery(q.PlaceUpdateQuery(isbn));
 				int ok = db.executeUpdateQuery() ;
 				if (ok != 0 )
 					System.out.println("done");
@@ -78,7 +73,6 @@ public class PromotionController {
 				e.printStackTrace();
 			}
     	}
-
     }
     public Stage getMyStage()
     {
@@ -88,7 +82,5 @@ public class PromotionController {
     public void  setStage(Stage stage)
     {
     	myStage =stage;
-    	db = new Database() ;
     }
-
 }

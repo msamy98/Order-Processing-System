@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.allControllers.ModifingBooks">
+   <children>
+      <VBox layoutX="3.0" layoutY="72.0" prefHeight="374.0" prefWidth="394.0">
+         <children>
+            <HBox alignment="CENTER" prefHeight="46.0" prefWidth="394.0" spacing="100.0">
+               <children>
+                  <Label text="ISBN:" />
+                  <TextField fx:id="ISBN" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="46.0" prefWidth="394.0" spacing="3.0">
+               <children>
+                  <Label text="New ISBN for Modifing:" />
+                  <TextField fx:id="newISBN" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="46.0" prefWidth="394.0" spacing="100.0">
+               <children>
+                  <Label text="Tilte:" />
+                  <TextField fx:id="title" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="46.0" prefWidth="394.0" spacing="42.0">
+               <children>
+                  <Label text="Publisher Name:" />
+                  <TextField fx:id="publisher_name" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="46.0" prefWidth="394.0" spacing="42.0">
+               <children>
+                  <Label text="Publishing Year:" />
+                  <TextField fx:id="publisher_year" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="46.0" prefWidth="394.0" spacing="100.0">
+               <children>
+                  <Label text="Price:" />
+                  <TextField fx:id="price" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="46.0" prefWidth="394.0" spacing="50.0">
+               <children>
+                  <Label text="Book Category:" />
+                  <TextField fx:id="book_category" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="46.0" prefWidth="394.0" spacing="85.0">
+               <children>
+                  <Label text="Quantity:" />
+                  <TextField fx:id="quantity" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="46.0" prefWidth="394.0" spacing="82.0">
+               <children>
+                  <Label text="Threshold:" />
+                  <TextField fx:id="threshold" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <HBox alignment="CENTER" layoutX="3.0" layoutY="514.0" prefHeight="46.0" prefWidth="394.0" spacing="100.0">
+         <children>
+            <Button mnemonicParsing="false" onAction="#addNewBooks" text="Add New Book" />
+            <Button mnemonicParsing="false" onAction="#modify" text="Modify Existing One" />
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" layoutX="94.0" layoutY="489.0" prefHeight="25.0" prefWidth="200.0">
+         <children>
+            <Label fx:id="error_msg" textFill="RED" visible="false" />
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>

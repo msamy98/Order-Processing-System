@@ -4,42 +4,45 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+
 import java.sql.*;
 
 public class User {
-	
-	
-	private String userName;
-	private String password;
-	private String firstName;
-	private String lastName;
-	private String email;
-	private String phone;
-	private String shippingAddress;
-	private int userType;
+
+
+	private SimpleStringProperty userName;
+	private SimpleStringProperty password;
+	private SimpleStringProperty firstName;
+	private SimpleStringProperty lastName;
+	private SimpleStringProperty email;
+	private SimpleStringProperty phone;
+	private SimpleStringProperty shippingAddress;
+	private SimpleIntegerProperty userType;
 	private ArrayList<Book> booksInCart;
-	
-	
+
+
 	public User(ResultSet userData) throws SQLException {
 		ResultSetMetaData metaData = userData.getMetaData();
 		while(userData.next()) {
 			for(int i=1 ; i<=metaData.getColumnCount() ; i++) {
 				switch (i) {
-				case 1: this.userName = userData.getString(i);
+				case 1: this.userName = new SimpleStringProperty( userData.getString(i));
 					break;
-				case 2: this.password = userData.getString(i);
+				case 2: this.password = new SimpleStringProperty( userData.getString(i));
 					break;
-				case 3: this.firstName = userData.getString(i);
+				case 3: this.firstName = new SimpleStringProperty( userData.getString(i));
 					break;
-				case 4: this.lastName = userData.getString(i);
+				case 4: this.lastName = new SimpleStringProperty( userData.getString(i));
 					break;
-				case 5: this.email = userData.getString(i);
+				case 5: this.email =new SimpleStringProperty( userData.getString(i));
 					break;
-				case 6: this.phone = userData.getString(i);
+				case 6: this.phone = new SimpleStringProperty( userData.getString(i));
 					break;
-				case 7: this.shippingAddress = userData.getString(i);
+				case 7: this.shippingAddress = new SimpleStringProperty( userData.getString(i));
 					break;
-				case 8: this.userType = userData.getInt(i);
+				case 8: this.userType = new SimpleIntegerProperty(userData.getInt(i));
 					break;
 				default:
 					break;
@@ -48,52 +51,52 @@ public class User {
 		}
 	}
 	public String getUserName() {
-		return userName;
+		return userName.get();
 	}
 	public void setUserName(String userName) {
-		this.userName = userName;
+		this.userName.set(userName);
 	}
 	public String getPassword() {
-		return password;
+		return password.get();
 	}
 	public void setPassword(String password) {
-		this.password = password;
+		this.password.set(password);
 	}
 	public String getFirstName() {
-		return firstName;
+		return firstName.get();
 	}
 	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+		this.firstName.set(firstName);;
 	}
 	public String getLastName() {
-		return lastName;
+		return lastName.get();
 	}
 	public void setLastName(String lastName) {
-		this.lastName = lastName;
+		this.lastName.set(lastName);
 	}
 	public String getPhone() {
-		return phone;
+		return phone.get();
 	}
 	public void setPhone(String phone) {
-		this.phone = phone;
+		this.phone.set(phone);
 	}
 	public String getShippingAddress() {
-		return shippingAddress;
+		return shippingAddress.get();
 	}
 	public void setShippingAddress(String shippingAddress) {
-		this.shippingAddress = shippingAddress;
+		this.shippingAddress.set(shippingAddress);
 	}
 	public int getUserType() {
-		return userType;
+		return userType.get();
 	}
 	public void setUserType(int userType) {
-		this.userType = userType;
+		this.userType.set(userType);
 	}
 	public String getEmail() {
-		return email;
+		return email.get();
 	}
 	public void setEmail(String email) {
-		this.email = email;
+		this.email.set(email);
 	}
 	public ArrayList<Book> getBooksInCart() {
 		return booksInCart;
@@ -104,8 +107,8 @@ public class User {
 	public void addInCart(Book book) {
 		booksInCart.add(book);
 	}
-	
-	
-	
+
+
+
 
 }
