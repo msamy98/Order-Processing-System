@@ -63,7 +63,7 @@ public class PromotionController {
 
 
 
-
+				db.databaseClose();
 			} catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -87,6 +87,7 @@ public class PromotionController {
 				else {
 					System.out.println("error");
 				}
+				db.databaseClose();
 			} catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

@@ -56,7 +56,7 @@ public class PlaceController {
 				db.setQuery(q.PlaceSearchQuery(placeSearchText.getText()));
 				ResultSet r = db.executeRetrieveQuery();
 
-
+				db.databaseClose();
 			} catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -79,6 +79,8 @@ public class PlaceController {
 				else {
 					System.out.println("error");
 				}
+				
+				db.databaseClose();
 			} catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

@@ -50,7 +50,7 @@ public class ConfirmController {
 				db.setQuery(q.ConfirmSearchQuery(SearchText.getText()));
 				ResultSet r = db.executeRetrieveQuery();
 
-
+				db.databaseClose();
 			} catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -74,6 +74,8 @@ public class ConfirmController {
 				else {
 					System.out.println("error");
 				}
+				
+				db.databaseClose();
 			} catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
