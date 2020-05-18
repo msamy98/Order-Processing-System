@@ -19,7 +19,7 @@
    <children>
       <VBox layoutX="605.0" layoutY="132.0" prefHeight="454.0" prefWidth="302.0">
          <children>
-            <Button fx:id="del_btn" mnemonicParsing="false" text="delete">
+            <Button fx:id="del_btn" mnemonicParsing="false" onAction="#delete_from_cart" text="delete">
                <VBox.margin>
                   <Insets bottom="5.0" />
                </VBox.margin></Button>
@@ -41,6 +41,7 @@
                <children>
                   <Label prefHeight="21.0" prefWidth="100.0" text="total price" />
                   <Label fx:id="price" text="price" />
+                  <Button fx:id="check_out_btn" mnemonicParsing="false" onAction="#check_out_Cart" text="check out cart" />
                </children>
             </VBox>
          </children>

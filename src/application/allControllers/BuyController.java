@@ -69,7 +69,10 @@ public class BuyController {
 	private Button add_btn; // Value injected by FXMLLoader
 
 	@FXML // fx:id="price_label"
-	private Label price_label; // Value injected by FXMLLoader
+	private Label price; // Value injected by FXMLLoader
+
+	 @FXML // fx:id="check_out_btn"
+	    private Button check_out_btn; // Value injected by FXMLLoader
 
 	private Stage myStage;
 	private ObservableList<Book> books_search;
@@ -79,10 +82,39 @@ public class BuyController {
 	@FXML
 	void minus(ActionEvent event) {
 		try {
-			Integer no = Integer.getInteger(quantity_text.getText());
+			Integer no = Integer.parseInt(quantity_text.getText());
+			if (no > 0)
+			{
 			no--;
-			if (no >= 0)
-				quantity_text.setText(Integer.toString(no));
+
+			int ix = cart_table.getSelectionModel().getSelectedIndex();
+			Book book =cart_table.getSelectionModel().getSelectedItem();
+
+			book.setNoOfCopiesInCart(no);
+			List<Book> list = new ArrayList<>();
+			for(Book b:cart)
+			{
+				if(b.getISBN()!=book.getISBN())
+				{
+					list.add(b);
+				}
+				else
+				{
+					list.add(book);
+				}
+			}
+			cart.clear();
+			cart.addAll(list);
+			cart_table.requestFocus();
+	        cart_table.getSelectionModel().select(ix);
+	        cart_table.getFocusModel().focus(ix);
+	        int tPrice=0;
+			for(Book b:cart)
+			{
+				tPrice+=b.getPrice()*(b.getNoOfCopiesInCart());
+			}
+			price.setText(Integer.toString(tPrice));
+			}
 		} catch (Exception e) {
 			System.out.println("error");
 		}
@@ -91,10 +123,38 @@ public class BuyController {
 	@FXML
 	void plus(ActionEvent event) {
 		try {
-			Integer no = Integer.getInteger(quantity_text.getText());
-			no++;
+			Integer no = Integer.parseInt(quantity_text.getText());
 			if (no >= 0)
-				quantity_text.setText(Integer.toString(no));
+			{
+			no++;
+			int ix = cart_table.getSelectionModel().getSelectedIndex();
+			Book book =cart_table.getSelectionModel().getSelectedItem();
+
+			book.setNoOfCopiesInCart(no);
+			List<Book> list = new ArrayList<>();
+			for(Book b:cart)
+			{
+				if(b.getISBN()!=book.getISBN())
+				{
+					list.add(b);
+				}
+				else
+				{
+					list.add(book);
+				}
+			}
+			cart.clear();
+			cart.addAll(list);
+			cart_table.requestFocus();
+	        cart_table.getSelectionModel().select(ix);
+	        cart_table.getFocusModel().focus(ix);
+	        int tPrice=0;
+			for(Book b:cart)
+			{
+				tPrice+=b.getPrice()*(b.getNoOfCopiesInCart());
+			}
+			price.setText(Integer.toString(tPrice));
+			}
 		} catch (Exception e) {
 			System.out.println("error");
 		}
@@ -132,9 +192,39 @@ public class BuyController {
 	@FXML
 	void add_book(ActionEvent event) {
 		Book book =book_search_table.getSelectionModel().getSelectedItem();
-		book.setQuantity(book.getQuantity()+1);
-		cart.add(book);
+		book.setNoOfCopiesInCart((book.getNoOfCopiesInCart()+1));
+		if(!cart.contains(book))
+		{
+		   cart.add(book);
+		}
+		else
+		{
+			List<Book> list = new ArrayList<>();
+			for(Book b:cart)
+			{
+				if(b.getISBN()!=book.getISBN())
+				{
+					list.add(b);
+				}
+				else
+				{
+					list.add(book);
+				}
+			}
+			cart.clear();
+			cart.addAll(list);
+		}
+		int tPrice=0;
+		for(Book b:cart)
+		{
+			tPrice+=b.getPrice()*(b.getNoOfCopiesInCart());
+		}
+		price.setText(Integer.toString(tPrice));
 	}
+	   @FXML
+	    void check_out_Cart(ActionEvent event) {
+
+	    }
 
 	public Stage getStage() {
 		return myStage;
@@ -164,6 +254,21 @@ public class BuyController {
 				if (!newValue.matches("\\d*")) {
 					quantity_text.setText(newValue.replaceAll("[^\\d]", ""));
 				}
+			}
+		});
+		cart_table.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Book>() {
+			@Override
+			public void changed(ObservableValue<? extends Book> observable, Book oldValue, Book newValue) {
+				if(newValue!=null)
+				{
+					quantity_text.setText(String.valueOf(newValue.getNoOfCopiesInCart()));
+				}
+				try {
+
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
+
 			}
 		});
 

@@ -41,6 +41,7 @@
                <children>
                   <Label prefHeight="21.0" prefWidth="100.0" text="total price" />
                   <Label fx:id="price" text="price" />
+                  <Button fx:id="check_out_btn" mnemonicParsing="false" onAction="#check_out_Cart" text="check out cart" />
                </children>
             </VBox>
          </children>
