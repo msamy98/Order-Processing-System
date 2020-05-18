@@ -27,13 +27,13 @@ public class Queries {
 		return s;
 	}
 
-	
-	
+
+
 	public String PlaceUpdateQuery (String isbn) {
-		
-		String s = "UPDATE order_processing_system.book_orders SET place = \'1\' WHERE book_orders.ISBN = \'" + isbn + "\' ; " ; 
-		
-		return s ; 
+
+		String s = "UPDATE order_processing_system.book_orders SET place = \'1\' WHERE book_orders.ISBN = \'" + isbn + "\' ; " ;
+
+		return s ;
 
 	}
 
@@ -59,7 +59,7 @@ public class Queries {
 
 		return s ;
 	}
-	
+
 	public String confirmUpdateQuery(String isbn) {
 		String s = "UPDATE order_processing_system.book SET quantity = threshold WHERE (ISBN = \'" + isbn + "\');";
 		System.out.println(isbn);
@@ -74,11 +74,11 @@ public class Queries {
 	}
 
 
-	
+
 	public String placeSelectAll() {
 		return "SELECT * FROM order_processing_system.book_orders;";
 	}
-	
+
 	 public String placeSelectJoinBook(String title) {
 		 String query = "SELECT title,quantity,price,publisher_name,book.ISBN,order_date,order_id FROM order_processing_system.book_orders,order_processing_system.book WHERE book.ISBN = book_orders.ISBN AND book_orders.place = 0";
 		 if(title != null)
@@ -86,13 +86,18 @@ public class Queries {
 		 query+= ";";
 		 return query;
 	 }
-	 
+
 	 public String confirmSelectJoinBook(String title) {
 		 String query = "SELECT title,quantity,price,publisher_name,book.ISBN,order_date,order_id FROM order_processing_system.book_orders,order_processing_system.book WHERE book.ISBN = book_orders.ISBN AND book_orders.place = 1";
 		 if(title != null)
 			 query = query + " AND book.title = \'" + title + "\'";
 		 query+= ";";
 		 return query;
+	 }
+	 public String checkOutCart(int isbn,int num)
+	 {
+		 String query="UPDATE order_processing_system.book SET quantity =quantity -"+ num+" WHERE (ISBN = '" + isbn + "')";
+		return query;
 	 }
 
 }

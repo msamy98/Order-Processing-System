@@ -12,6 +12,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.sql.ResultSet;
@@ -31,6 +32,9 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 
 public class BuyController {
+
+	@FXML // fx:id="error_msg"
+    private Label error_msg; // Value injected by FXMLLoader
 
 	@FXML // fx:id="last_name"
 	private Label last_name; // Value injected by FXMLLoader
@@ -78,6 +82,8 @@ public class BuyController {
 	private ObservableList<Book> books_search;
 	private ObservableList<Book> cart;
 	private Database db;
+    private String last_search="";
+    private String last_cat="";
 
 	@FXML
 	void minus(ActionEvent event) {
@@ -108,9 +114,7 @@ public class BuyController {
 					tPrice += b.getPrice() * (b.getNoOfCopiesInCart());
 				}
 				price.setText(Integer.toString(tPrice));
-			}
-			else if(no==1)
-			{
+			} else if (no == 1) {
 				delete_from_cart(event);
 			}
 		} catch (Exception e) {
@@ -156,40 +160,21 @@ public class BuyController {
 	void search_for_books(ActionEvent event) {
 		String value = seach_text.getText();
 		String cat = search_cat.getValue();
-		books_search.clear();
-		try {
-			db.databaseConnector();
-			Queries q = new Queries();
-			db.setQuery(q.searchBookQuery(cat, value));
-			ResultSet r = db.executeRetrieveQuery();
-			books_search.addAll(booksFormResultSet(r));
-			db.databaseClose();
-		} catch (InstantiationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		Queries q = new Queries();
+		search_books(value, cat);
 
 	}
 
 	@FXML
 	void delete_from_cart(ActionEvent event) {
+		try {
+		error_msg.setVisible(false);
 		int ix = cart_table.getSelectionModel().getSelectedIndex();
 		Book book = cart_table.getSelectionModel().getSelectedItem();
 		cart.remove(ix);
 		if (ix != 0) {
 
-            ix = ix -1;
-        }
+			ix = ix - 1;
+		}
 
 		cart_table.requestFocus();
 		cart_table.getSelectionModel().select(ix);
@@ -199,11 +184,20 @@ public class BuyController {
 			tPrice += b.getPrice() * (b.getNoOfCopiesInCart());
 		}
 		price.setText(Integer.toString(tPrice));
+		}
+		catch(Exception e)
+		{
+			error_msg.setText("non selcetion to delete");
+            error_msg.setVisible(true);
+            error_msg.setTextFill(Color.RED);
+		}
 
 	}
 
 	@FXML
 	void add_book(ActionEvent event) {
+		try {
+		error_msg.setVisible(false);
 		Book book = book_search_table.getSelectionModel().getSelectedItem();
 		book.setNoOfCopiesInCart((book.getNoOfCopiesInCart() + 1));
 		if (!cart.contains(book)) {
@@ -225,10 +219,45 @@ public class BuyController {
 			tPrice += b.getPrice() * (b.getNoOfCopiesInCart());
 		}
 		price.setText(Integer.toString(tPrice));
+		}catch (Exception e)
+		{
+			error_msg.setText("non selcetion to add");
+            error_msg.setVisible(true);
+            error_msg.setTextFill(Color.RED);
+		}
 	}
 
 	@FXML
 	void check_out_Cart(ActionEvent event) {
+
+		try {
+			error_msg.setVisible(false);
+			db.databaseConnector();
+			Queries q = new Queries();
+			for (Book b : cart) {
+				db.setQuery(q.checkOutCart(b.getISBN(), b.getNoOfCopiesInCart()));
+				db.executeUpdateQuery();
+			}
+			db.databaseClose();
+			cart.clear();
+			price.setText("0");
+			search_books(last_search, last_cat);
+
+
+
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
 
@@ -363,5 +392,31 @@ public class BuyController {
 		}
 
 		return bookList;
+	}
+	private void search_books(String value ,String cat)
+	{
+		books_search.clear();
+		try {
+			db.databaseConnector();
+			Queries q = new Queries();
+			db.setQuery(q.searchBookQuery(cat, value));
+			ResultSet r = db.executeRetrieveQuery();
+			books_search.addAll(booksFormResultSet(r));
+			db.databaseClose();
+			last_search=value;
+			last_cat=cat;
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }
