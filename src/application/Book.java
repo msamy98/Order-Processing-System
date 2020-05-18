@@ -12,15 +12,23 @@ public class Book {
 	private SimpleStringProperty publisherName;
 	private SimpleStringProperty publishingYear;
 	private SimpleIntegerProperty price;
-	private SimpleIntegerProperty bookCategory;
+	private SimpleStringProperty bookCategory;
 	private SimpleIntegerProperty quantity;
 	private SimpleIntegerProperty threshold;
 	private SimpleIntegerProperty noOfCopiesInCart;
 	public Book()
 	{
-
+		this.ISBN = new SimpleIntegerProperty ();
+		this.title = new SimpleStringProperty();
+		this.publisherName = new SimpleStringProperty();
+		this.publishingYear= new SimpleStringProperty();
+		this.price = new SimpleIntegerProperty ();
+		this.bookCategory = new SimpleStringProperty();
+		this.quantity = new SimpleIntegerProperty ();
+		this.threshold = new SimpleIntegerProperty ();
+		this.noOfCopiesInCart = new SimpleIntegerProperty();
 	}
-	public Book(int ISBN,String title,String publisherName, String publishingYear,int price,int bookCategory
+	public Book(int ISBN,String title,String publisherName, String publishingYear,int price,String bookCategory
 			,int quantity,int threshold,int noOfCopiesInCart)
 	{
 		this.ISBN = new SimpleIntegerProperty (ISBN);
@@ -28,9 +36,10 @@ public class Book {
 		this.publisherName = new SimpleStringProperty(publisherName);
 		this.publishingYear= new SimpleStringProperty(publishingYear);
 		this.price = new SimpleIntegerProperty (price);
-		this.bookCategory = new SimpleIntegerProperty (bookCategory);
+		this.bookCategory = new SimpleStringProperty(bookCategory);
 		this.quantity = new SimpleIntegerProperty (quantity);
 		this.threshold = new SimpleIntegerProperty (threshold);
+		this.noOfCopiesInCart = new SimpleIntegerProperty(noOfCopiesInCart);
 	}
 	public Book(ResultSet bookData) throws SQLException {
 		ResultSetMetaData metaData = bookData.getMetaData();
@@ -47,7 +56,7 @@ public class Book {
 					break;
 				case 5: this.price = new SimpleIntegerProperty (bookData.getInt(i));
 					break;
-				case 6: this.bookCategory = new SimpleIntegerProperty (bookData.getInt(i));
+				case 6: this.bookCategory = new SimpleStringProperty(bookData.getString(i));
 					break;
 				case 7: this.quantity = new SimpleIntegerProperty (bookData.getInt(i));
 					break;
@@ -92,10 +101,10 @@ public class Book {
 	public void setPrice(int price) {
 		this.price.set(price);
 	}
-	public int getBookCategory() {
+	public String getBookCategory() {
 		return bookCategory.get();
 	}
-	public void setBookCategory(int bookCategory) {
+	public void setBookCategory(String bookCategory) {
 		this.bookCategory.set(bookCategory);
 	}
 	public int getQuantity() {
