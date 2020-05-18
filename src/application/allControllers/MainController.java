@@ -1,6 +1,7 @@
 package application.allControllers;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import application.FxmlLoader;
 import application.User;
@@ -45,6 +46,9 @@ public class MainController {
 
     @FXML // fx:id="placeBt"
     public Button confirmBt;
+    
+    @FXML
+    public Button reportBt;
 
      private User user;
      private Stage myStage;
@@ -113,7 +117,7 @@ public class MainController {
 
     }
     @FXML
-    void place_book_orders(ActionEvent event) {
+    void place_book_orders(ActionEvent event) throws SQLException, InstantiationException, IllegalAccessException, ClassNotFoundException {
     	FXMLLoader loader = new FXMLLoader(getClass().getResource("/PlaceGui.fxml"));
     	Pane p ;
     	try {
@@ -142,7 +146,7 @@ public class MainController {
 
 
     @FXML
-    void confirm_book_orders(ActionEvent event) {
+    void confirm_book_orders(ActionEvent event) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
     	FXMLLoader loader = new FXMLLoader(getClass().getResource("/ConfirmGui.fxml"));
     	Pane p ;
     	try {

@@ -27,28 +27,14 @@ public class Queries {
 		return s;
 	}
 
-
-	public String PlaceSearchQuery (String title) {
-
-		String s = " select isbn , title , publisher_name ,  price  , quantity   \r\n" +
-				" from order_processing_system.book_orders , order_processing_system.book \r\n" +
-				" where place = 0 and book_orders.isbn = book.isbn " ;
-
-		if (title != null)
-			s += "book_orders.title = '" + title + "' " ;
-
-			s+= ";" ;
-
-		return s ;
-	}
-
+	
+	
 	public String PlaceUpdateQuery (String isbn) {
+		
+		String s = "UPDATE order_processing_system.book_orders SET place = \'1\' WHERE book_orders.ISBN = \'" + isbn + "\' ; " ; 
+		
+		return s ; 
 
-		String s = "update order_processing_system.book_orders\r\n" +
-				"set place = 1 \r\n" +
-				"where  book_orders.isbn = " + isbn + " ; " ;
-
-		return s ;
 	}
 
 
@@ -67,12 +53,17 @@ public class Queries {
 
 	}
 
-	public String ConfirmUpdateQuert (String isbn) {
+	public String confirmDeleteQuery (String isbn) {
 
-		String s = "delete from order_processing_system.book_orders \r\n" +
-				"where isbn = "+ isbn +" ; " ;
+		String s = "DELETE FROM order_processing_system.book_orders WHERE ISBN = "+ isbn +" ; " ;
 
 		return s ;
+	}
+	
+	public String confirmUpdateQuery(String isbn) {
+		String s = "UPDATE order_processing_system.book SET quantity = threshold WHERE (ISBN = \'" + isbn + "\');";
+		System.out.println(isbn);
+		return s;
 	}
 	public String searchBookQuery(String cat, String value)
 	{
@@ -81,5 +72,27 @@ public class Queries {
                 "where book.book_catagory = catagory.id and book."+cat+"= '"+value+"'";
 		return s;
 	}
+
+
+	
+	public String placeSelectAll() {
+		return "SELECT * FROM order_processing_system.book_orders;";
+	}
+	
+	 public String placeSelectJoinBook(String title) {
+		 String query = "SELECT title,quantity,price,publisher_name,book.ISBN,order_date,order_id FROM order_processing_system.book_orders,order_processing_system.book WHERE book.ISBN = book_orders.ISBN AND book_orders.place = 0";
+		 if(title != null)
+			 query = query + " AND book.title = \'" + title + "\'";
+		 query+= ";";
+		 return query;
+	 }
+	 
+	 public String confirmSelectJoinBook(String title) {
+		 String query = "SELECT title,quantity,price,publisher_name,book.ISBN,order_date,order_id FROM order_processing_system.book_orders,order_processing_system.book WHERE book.ISBN = book_orders.ISBN AND book_orders.place = 1";
+		 if(title != null)
+			 query = query + " AND book.title = \'" + title + "\'";
+		 query+= ";";
+		 return query;
+	 }
 
 }

@@ -41,35 +41,9 @@ public class Book {
 		this.threshold = new SimpleIntegerProperty (threshold);
 		this.noOfCopiesInCart = new SimpleIntegerProperty(noOfCopiesInCart);
 	}
-	public Book(ResultSet bookData) throws SQLException {
-		ResultSetMetaData metaData = bookData.getMetaData();
-		while(bookData.next()) {
-			for (int i=1 ; i<=metaData.getColumnCount() ; i++) {
-				switch (i) {
-				case 1: this.ISBN = new SimpleIntegerProperty (bookData.getInt(i));
-					break;
-				case 2: this.title = new SimpleStringProperty(bookData.getString(i));
-					break;
-				case 3: this.publisherName = new SimpleStringProperty(bookData.getString(i));
-					break;
-				case 4: this.publishingYear= new SimpleStringProperty(bookData.getString(i));
-					break;
-				case 5: this.price = new SimpleIntegerProperty (bookData.getInt(i));
-					break;
-				case 6: this.bookCategory = new SimpleStringProperty(bookData.getString(i));
-					break;
-				case 7: this.quantity = new SimpleIntegerProperty (bookData.getInt(i));
-					break;
-				case 8: this.threshold = new SimpleIntegerProperty (bookData.getInt(i));
-					break;
-				default:
-					break;
-				}
-			}
-		}
-		bookData.close();
-		this.noOfCopiesInCart = new SimpleIntegerProperty (0);;
-	}
+		
+		
+
 
 	public int getISBN() {
 		return ISBN.get();
