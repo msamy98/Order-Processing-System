@@ -40,5 +40,6 @@
       </VBox>
       <Button fx:id="sign_in_btn" layoutX="143.0" layoutY="221.0" mnemonicParsing="false" onAction="#sign_in" text="sign in" />
       <Hyperlink fx:id="sign_up_link" layoutX="66.0" layoutY="271.0" onAction="#sign_up" text="i don't have an account sign up" />
+      <Label fx:id="error_msg" layoutX="52.0" layoutY="304.0" prefHeight="17.0" prefWidth="233.0" visible="false" />
    </children>
 </AnchorPane>

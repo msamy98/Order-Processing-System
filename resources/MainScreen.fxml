@@ -42,7 +42,7 @@
                         <Insets top="10.0" />
                      </VBox.margin>
                   </Button>
-                  <Button fx:id="confirmBt1" mnemonicParsing="false" onAction="#confirm_book_orders" prefHeight="31.0" prefWidth="128.0" text="confirm">
+                  <Button fx:id="confirmBt" mnemonicParsing="false" onAction="#confirm_book_orders" prefHeight="31.0" prefWidth="128.0" text="confirm">
                      <VBox.margin>
                         <Insets top="10.0" />
                      </VBox.margin>

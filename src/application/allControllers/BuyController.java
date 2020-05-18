@@ -71,49 +71,47 @@ public class BuyController {
 	@FXML // fx:id="price_label"
 	private Label price; // Value injected by FXMLLoader
 
-	 @FXML // fx:id="check_out_btn"
-	    private Button check_out_btn; // Value injected by FXMLLoader
+	@FXML // fx:id="check_out_btn"
+	private Button check_out_btn; // Value injected by FXMLLoader
 
 	private Stage myStage;
 	private ObservableList<Book> books_search;
 	private ObservableList<Book> cart;
-	private Database db ;
+	private Database db;
 
 	@FXML
 	void minus(ActionEvent event) {
 		try {
 			Integer no = Integer.parseInt(quantity_text.getText());
-			if (no > 0)
-			{
-			no--;
+			if (no > 1) {
+				no--;
 
-			int ix = cart_table.getSelectionModel().getSelectedIndex();
-			Book book =cart_table.getSelectionModel().getSelectedItem();
+				int ix = cart_table.getSelectionModel().getSelectedIndex();
+				Book book = cart_table.getSelectionModel().getSelectedItem();
 
-			book.setNoOfCopiesInCart(no);
-			List<Book> list = new ArrayList<>();
-			for(Book b:cart)
-			{
-				if(b.getISBN()!=book.getISBN())
-				{
-					list.add(b);
+				book.setNoOfCopiesInCart(no);
+				List<Book> list = new ArrayList<>();
+				for (Book b : cart) {
+					if (b.getISBN() != book.getISBN()) {
+						list.add(b);
+					} else {
+						list.add(book);
+					}
 				}
-				else
-				{
-					list.add(book);
+				cart.clear();
+				cart.addAll(list);
+				cart_table.requestFocus();
+				cart_table.getSelectionModel().select(ix);
+				cart_table.getFocusModel().focus(ix);
+				int tPrice = 0;
+				for (Book b : cart) {
+					tPrice += b.getPrice() * (b.getNoOfCopiesInCart());
 				}
+				price.setText(Integer.toString(tPrice));
 			}
-			cart.clear();
-			cart.addAll(list);
-			cart_table.requestFocus();
-	        cart_table.getSelectionModel().select(ix);
-	        cart_table.getFocusModel().focus(ix);
-	        int tPrice=0;
-			for(Book b:cart)
+			else if(no==1)
 			{
-				tPrice+=b.getPrice()*(b.getNoOfCopiesInCart());
-			}
-			price.setText(Integer.toString(tPrice));
+				delete_from_cart(event);
 			}
 		} catch (Exception e) {
 			System.out.println("error");
@@ -124,36 +122,30 @@ public class BuyController {
 	void plus(ActionEvent event) {
 		try {
 			Integer no = Integer.parseInt(quantity_text.getText());
-			if (no >= 0)
-			{
-			no++;
-			int ix = cart_table.getSelectionModel().getSelectedIndex();
-			Book book =cart_table.getSelectionModel().getSelectedItem();
+			if (no >= 0) {
+				no++;
+				int ix = cart_table.getSelectionModel().getSelectedIndex();
+				Book book = cart_table.getSelectionModel().getSelectedItem();
 
-			book.setNoOfCopiesInCart(no);
-			List<Book> list = new ArrayList<>();
-			for(Book b:cart)
-			{
-				if(b.getISBN()!=book.getISBN())
-				{
-					list.add(b);
+				book.setNoOfCopiesInCart(no);
+				List<Book> list = new ArrayList<>();
+				for (Book b : cart) {
+					if (b.getISBN() != book.getISBN()) {
+						list.add(b);
+					} else {
+						list.add(book);
+					}
 				}
-				else
-				{
-					list.add(book);
+				cart.clear();
+				cart.addAll(list);
+				cart_table.requestFocus();
+				cart_table.getSelectionModel().select(ix);
+				cart_table.getFocusModel().focus(ix);
+				int tPrice = 0;
+				for (Book b : cart) {
+					tPrice += b.getPrice() * (b.getNoOfCopiesInCart());
 				}
-			}
-			cart.clear();
-			cart.addAll(list);
-			cart_table.requestFocus();
-	        cart_table.getSelectionModel().select(ix);
-	        cart_table.getFocusModel().focus(ix);
-	        int tPrice=0;
-			for(Book b:cart)
-			{
-				tPrice+=b.getPrice()*(b.getNoOfCopiesInCart());
-			}
-			price.setText(Integer.toString(tPrice));
+				price.setText(Integer.toString(tPrice));
 			}
 		} catch (Exception e) {
 			System.out.println("error");
@@ -167,7 +159,7 @@ public class BuyController {
 		books_search.clear();
 		try {
 			db.databaseConnector();
-			Queries q = new Queries() ;
+			Queries q = new Queries();
 			db.setQuery(q.searchBookQuery(cat, value));
 			ResultSet r = db.executeRetrieveQuery();
 			books_search.addAll(booksFormResultSet(r));
@@ -185,46 +177,60 @@ public class BuyController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		Queries q = new Queries() ;
+		Queries q = new Queries();
+
+	}
+
+	@FXML
+	void delete_from_cart(ActionEvent event) {
+		int ix = cart_table.getSelectionModel().getSelectedIndex();
+		Book book = cart_table.getSelectionModel().getSelectedItem();
+		cart.remove(ix);
+		if (ix != 0) {
+
+            ix = ix -1;
+        }
+
+		cart_table.requestFocus();
+		cart_table.getSelectionModel().select(ix);
+		cart_table.getFocusModel().focus(ix);
+		int tPrice = 0;
+		for (Book b : cart) {
+			tPrice += b.getPrice() * (b.getNoOfCopiesInCart());
+		}
+		price.setText(Integer.toString(tPrice));
 
 	}
 
 	@FXML
 	void add_book(ActionEvent event) {
-		Book book =book_search_table.getSelectionModel().getSelectedItem();
-		book.setNoOfCopiesInCart((book.getNoOfCopiesInCart()+1));
-		if(!cart.contains(book))
-		{
-		   cart.add(book);
-		}
-		else
-		{
+		Book book = book_search_table.getSelectionModel().getSelectedItem();
+		book.setNoOfCopiesInCart((book.getNoOfCopiesInCart() + 1));
+		if (!cart.contains(book)) {
+			cart.add(book);
+		} else {
 			List<Book> list = new ArrayList<>();
-			for(Book b:cart)
-			{
-				if(b.getISBN()!=book.getISBN())
-				{
+			for (Book b : cart) {
+				if (b.getISBN() != book.getISBN()) {
 					list.add(b);
-				}
-				else
-				{
+				} else {
 					list.add(book);
 				}
 			}
 			cart.clear();
 			cart.addAll(list);
 		}
-		int tPrice=0;
-		for(Book b:cart)
-		{
-			tPrice+=b.getPrice()*(b.getNoOfCopiesInCart());
+		int tPrice = 0;
+		for (Book b : cart) {
+			tPrice += b.getPrice() * (b.getNoOfCopiesInCart());
 		}
 		price.setText(Integer.toString(tPrice));
 	}
-	   @FXML
-	    void check_out_Cart(ActionEvent event) {
 
-	    }
+	@FXML
+	void check_out_Cart(ActionEvent event) {
+
+	}
 
 	public Stage getStage() {
 		return myStage;
@@ -247,6 +253,7 @@ public class BuyController {
 		catList.add("quantity");
 		search_cat.setItems(catList);
 		search_cat.setValue("ISBN");
+		price.setText("0");
 
 		quantity_text.textProperty().addListener(new ChangeListener<String>() {
 			@Override
@@ -259,8 +266,7 @@ public class BuyController {
 		cart_table.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Book>() {
 			@Override
 			public void changed(ObservableValue<? extends Book> observable, Book oldValue, Book newValue) {
-				if(newValue!=null)
-				{
+				if (newValue != null) {
 					quantity_text.setText(String.valueOf(newValue.getNoOfCopiesInCart()));
 				}
 				try {
@@ -334,29 +340,28 @@ public class BuyController {
 
 		cart_table.getColumns().setAll(columnsCart);
 	}
-   public List<Book> booksFormResultSet(ResultSet resultSet)
-   {
 
-	   List<Book> bookList = new ArrayList<>();
-	   try {
-		while(resultSet.next())
-		   {
-			   Book book = new Book();
-			   book.setISBN(resultSet.getInt("ISBN"));
-			   book.setTitle(resultSet.getString("title"));
-			   book.setPublisherName(resultSet.getString("publisher_name"));
-			   book.setPublishingYear(resultSet.getString("publishing_year"));
-			   book.setPrice(resultSet.getInt("price"));
-			   book.setQuantity(resultSet.getInt("quantity"));
-			   book.setBookCategory(resultSet.getString("catagory_name"));
-			   book.setNoOfCopiesInCart(0);
-			   bookList.add(book);
-		   }
-	} catch (SQLException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
+	public List<Book> booksFormResultSet(ResultSet resultSet) {
+
+		List<Book> bookList = new ArrayList<>();
+		try {
+			while (resultSet.next()) {
+				Book book = new Book();
+				book.setISBN(resultSet.getInt("ISBN"));
+				book.setTitle(resultSet.getString("title"));
+				book.setPublisherName(resultSet.getString("publisher_name"));
+				book.setPublishingYear(resultSet.getString("publishing_year"));
+				book.setPrice(resultSet.getInt("price"));
+				book.setQuantity(resultSet.getInt("quantity"));
+				book.setBookCategory(resultSet.getString("catagory_name"));
+				book.setNoOfCopiesInCart(0);
+				bookList.add(book);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return bookList;
 	}
-
-       return bookList;
-   }
 }

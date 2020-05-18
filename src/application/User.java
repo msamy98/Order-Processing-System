@@ -21,7 +21,7 @@ public class User {
 	private SimpleStringProperty shippingAddress;
 	private SimpleIntegerProperty userType;
 	private ArrayList<Book> booksInCart;
-
+	
 
 	public User(ResultSet userData) throws SQLException {
 		ResultSetMetaData metaData = userData.getMetaData();

@@ -19,7 +19,7 @@
    <children>
       <VBox layoutX="605.0" layoutY="132.0" prefHeight="454.0" prefWidth="302.0">
          <children>
-            <Button fx:id="del_btn" mnemonicParsing="false" text="delete">
+            <Button fx:id="del_btn" mnemonicParsing="false" onAction="#delete_from_cart" text="delete">
                <VBox.margin>
                   <Insets bottom="5.0" />
                </VBox.margin></Button>
