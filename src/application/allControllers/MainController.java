@@ -11,6 +11,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
@@ -49,7 +50,13 @@ public class MainController {
     
     @FXML
     public Button reportBt;
-
+    
+    @FXML
+    public Label label1;
+    
+    @FXML 
+    private Label label2;
+    
      private User user;
      private Stage myStage;
 

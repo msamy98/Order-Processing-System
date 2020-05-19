@@ -58,6 +58,8 @@ public class SignInController {
 						if(result.getInt("user_type") == 0) {
 		    				Manger manger = new Manger(result);
 		    				mainController.setUser(manger);
+		    				result.previous();
+		    				mainController.label1.setText("WELCOME " + result.getString("first_name")+" " + result.getString("last_name")+ " TO OUR");
 		    				mainController.porBt.setVisible(true);
 		    				mainController.placeBt.setVisible(true);
 		    				mainController.modify.setVisible(true);
@@ -67,6 +69,8 @@ public class SignInController {
 		    			else {
 		    				User customer = new User(result);
 		    				mainController.setUser(customer);
+		    				mainController.label1.setText("WELCOME " + result.getString("first_name")+" " + result.getString("last_name")+ " TO OUR");
+		    				result.previous();
 		    				mainController.porBt.setVisible(false);
 		    				mainController.placeBt.setVisible(false);
 		    				mainController.modify.setVisible(false);
