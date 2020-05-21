@@ -1,11 +1,10 @@
 package application.allControllers;
 
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
-import application.Book_order;
 import application.Database;
 import application.Queries;
 import application.User;
@@ -32,10 +31,8 @@ public class PromotionController {
     @FXML
     private Button userNameSearchBt;
 
-
     @FXML
     private TableView<User> userTable;
-
 
     private Database db ;
 
@@ -53,16 +50,10 @@ public class PromotionController {
     			db.databaseConnector();
 				Queries q = new Queries() ;
 				String s = q.promotionSearchQuery(userSearchText.getText()) ;
+				//System.out.println(s);
 				db.setQuery(s) ;
-				ResultSet r = db.executeRetrieveQuery() ;
-				
-				while (r.next()) {
-					
-					
-				}
-
-
-
+				ResultSet userData = db.executeRetrieveQuery() ;
+				ListOfUser(proList , userData) ; 
 				db.databaseClose();
 			} catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException e) {
 				// TODO Auto-generated catch block
@@ -75,16 +66,19 @@ public class PromotionController {
     @FXML
     void udateUserStatus(ActionEvent event) {
     	/* get selected inbn */
-    	String userName = "" ;
+    	int ix = userTable.getSelectionModel().getSelectedIndex();
+    	User u = userTable.getSelectionModel().getSelectedItem();
+    	String userName = u.getUserName() ;
     	if (userName != "" ) {
     		try {
 				db.databaseConnector();
 				Queries q = new Queries() ;
 				db.setQuery(q.promtionUpdateQuery(userName));
 				int ok = db.executeUpdateQuery() ;
-				if (ok != 0 )
+				if (ok != 0 ) {
+					proList.remove(ix);
 					System.out.println("done");
-				else {
+				}else {
 					System.out.println("error");
 				}
 				db.databaseClose();
@@ -121,10 +115,10 @@ public class PromotionController {
         
       
         TableColumn e_mail = new TableColumn("e_mail");
-        e_mail.setCellValueFactory(new PropertyValueFactory("e_mail"));
+        e_mail.setCellValueFactory(new PropertyValueFactory("email"));
         
         TableColumn shipping_address = new TableColumn("shipping_address");
-        shipping_address.setCellValueFactory(new PropertyValueFactory("shipping_address"));
+        shipping_address.setCellValueFactory(new PropertyValueFactory("ShippingAddress"));
 
 
 
@@ -136,6 +130,87 @@ public class PromotionController {
         columnsCart.add(shipping_address);
 
         userTable.getColumns().setAll(columnsCart);
+        
+        try {
+			db.databaseConnector();
+			Queries q = new Queries() ;
+			String s = q.promotionSearchQuery(null) ;
+			//System.out.println(s);
+			db.setQuery(s) ;
+			ResultSet userData = db.executeRetrieveQuery() ;
+			ListOfUser(proList , userData) ; 
+			db.databaseClose();
+		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
+    
+    private void ListOfUser(ObservableList<User> proList , ResultSet userData  ) throws SQLException {
+    	
+    	proList.clear();
+        ResultSetMetaData metaData = userData.getMetaData();
+        while(userData.next()) {
+        	User u = new User() ; 
+            for(int i=1 ; i<=metaData.getColumnCount() ; i++) {
+                switch (i) {
+                case 1: //System.out.println(userData.getString(i));
+                	u.setUserName(userData.getString(i)) ;
+                    break;
+                case 2: u.setFirstName( userData.getString(i));
+                    break;
+                case 3: u.setLastName(userData.getString(i));
+                    break;
+                case 4: u.setEmail(userData.getString(i));
+                    break;
+                case 5: u.setShippingAddress(userData.getString(i));
+                    break;
+                default:
+                    break;
+                }
+            }
+            proList.add(u) ; 
+        }
+        
+    	
+    }
+    
+    /* private void ListOfUser(ObservableList<User> proList , ResultSet userData  ) throws SQLException {
+    	
+
+        ResultSetMetaData metaData = userData.getMetaData();
+        while(userData.next()) {
+        	User u = new User() ; 
+            for(int i=1 ; i<=metaData.getColumnCount() ; i++) {
+                switch (i) {
+                case 1: //System.out.println(userData.getString(i));
+                	u.setUserName(userData.getString(i)) ;
+                    break;
+                case 2: u.setPassword(userData.getString(i));
+                    break;
+                case 3: u.setFirstName( userData.getString(i));
+                    break;
+                case 4: u.setLastName(userData.getString(i));
+                    break;
+                case 5: u.setEmail(userData.getString(i));
+                    break;
+                case 6: u.setPhone(userData.getString(i));
+                    break;
+                case 7: u.setShippingAddress(userData.getString(i));
+                    break;
+                case 8: u.setUserType(userData.getInt(i));
+                    break;
+                default:
+                    break;
+                }
+            }
+            proList.add(u) ; 
+        }
+        
+    	
+    }
+    */
+    
+    
 
 }

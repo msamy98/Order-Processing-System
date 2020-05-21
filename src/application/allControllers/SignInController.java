@@ -69,8 +69,9 @@ public class SignInController {
 		    			else {
 		    				User customer = new User(result);
 		    				mainController.setUser(customer);
-		    				mainController.label1.setText("WELCOME " + result.getString("first_name")+" " + result.getString("last_name")+ " TO OUR");
 		    				result.previous();
+		    				mainController.label1.setText("WELCOME " + result.getString("first_name")+" " + result.getString("last_name")+ " TO OUR");
+		    				//mainController.label1.setAlignment(mainController..CENTER);
 		    				mainController.porBt.setVisible(false);
 		    				mainController.placeBt.setVisible(false);
 		    				mainController.modify.setVisible(false);

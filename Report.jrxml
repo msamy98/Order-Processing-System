@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.12.2.final using JasperReports Library version 6.12.2-75c5e90a222ab406e416cbf590a5397028a52de3  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Report" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="133da77d-f04c-4e2b-92c4-15a1366d23da">
+	<parameter name="best" class="java.lang.String"/>
+	<parameter name="el7amd" class="java.lang.String"/>
+	<parameter name="secPar" class="java.lang.String"/>
+	<parameter name="thirPar" class="java.lang.String"/>
+	<parameter name="pnum1" class="java.lang.String"/>
+	<parameter name="pnum2" class="java.lang.String"/>
+	<parameter name="Pnum3" class="java.lang.String"/>
+	<parameter name="isbnp" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="429" splitType="Stretch">
+			<staticText>
+				<reportElement x="20" y="20" width="230" height="30" uuid="a5c35ec3-04e3-41fc-bef5-a411cb927758"/>
+				<textElement>
+					<font size="20"/>
+				</textElement>
+				<text><![CDATA[The top 5 customers :]]></text>
+			</staticText>
+			<textField>
+				<reportElement stretchType="RelativeToTallestObject" x="260" y="20" width="190" height="150" uuid="b0a301f8-3a1f-40a3-aa7d-c96919aef5aa"/>
+				<textElement>
+					<font size="18"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{el7amd}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="20" y="180" width="230" height="30" uuid="8fc8874f-c20e-4bb9-a3ec-8a38e0171140"/>
+				<textElement>
+					<font size="20"/>
+				</textElement>
+				<text><![CDATA[The top 10 selling books :
+]]></text>
+			</staticText>
+			<textField>
+				<reportElement stretchType="RelativeToTallestObject" x="260" y="180" width="190" height="249" uuid="8cc393e0-556f-4137-b963-8b652b2e0801"/>
+				<textElement>
+					<font size="18"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{secPar}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="460" y="20" width="100" height="150" uuid="138bde68-35ec-4587-9b64-892725c80dff"/>
+				<textElement>
+					<font size="18"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{pnum1}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="460" y="180" width="100" height="249" uuid="35197a9d-a3a1-4945-a816-82061961e8c8"/>
+				<textElement>
+					<font size="18"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{pnum2}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="319" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="20" width="200" height="30" uuid="c8446bc1-a8ab-4507-80a9-71c35cd53d86"/>
+				<textElement>
+					<font size="20"/>
+				</textElement>
+				<text><![CDATA[The total sales:]]></text>
+			</staticText>
+			<textField>
+				<reportElement stretchType="RelativeToTallestObject" x="300" y="21" width="150" height="289" uuid="b6605039-5822-47ec-bfad-af8324284eed"/>
+				<textElement>
+					<font size="18"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{thirPar}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="460" y="21" width="100" height="289" uuid="ab59bbf3-0cf5-44af-b29b-f2c9d9a97e97"/>
+				<textElement>
+					<font size="18"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{Pnum3}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="180" y="20" width="110" height="290" uuid="bc93bd0d-c656-48f7-b570-f07d0d35388a"/>
+				<textElement>
+					<font size="18"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{isbnp}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

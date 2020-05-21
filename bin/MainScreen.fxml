@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="Archo" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.allControllers.MainController">
+<AnchorPane fx:id="Archo" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.allControllers.MainController">
    <children>
       <BorderPane fx:id="mainBorderPane" prefHeight="600.0" prefWidth="1050.0">
          <left>
@@ -64,14 +64,14 @@
          <center>
             <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
-                  <Label fx:id="label1" contentDisplay="CENTER" layoutX="283.0" layoutY="248.0" text="WELCOME TO OUR" textAlignment="CENTER">
+                  <Label fx:id="label1" contentDisplay="CENTER" layoutX="289.0" layoutY="247.0" text="WELCOME TO OUR" textAlignment="CENTER">
                      <font>
-                        <Font size="40.0" />
+                        <Font size="30.0" />
                      </font>
                   </Label>
-                  <Label fx:id="label2" layoutX="337.0" layoutY="306.0" text="BOOKSTORE!">
+                  <Label fx:id="label2" layoutX="330.0" layoutY="300.0" text="BOOKSTORE!">
                      <font>
-                        <Font size="40.0" />
+                        <Font size="30.0" />
                      </font>
                   </Label>
                </children>

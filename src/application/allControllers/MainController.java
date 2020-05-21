@@ -1,9 +1,15 @@
 package application.allControllers;
 
+import java.io.File;
 import java.io.IOException;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 
+import application.Database;
 import application.FxmlLoader;
+import application.Queries;
 import application.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -16,6 +22,14 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import net.sf.jasperreports.engine.JRDataSource;
+import net.sf.jasperreports.engine.JREmptyDataSource;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
 
 
 public class MainController {
@@ -58,6 +72,7 @@ public class MainController {
     private Label label2;
     
      private User user;
+     
      private Stage myStage;
 
      public void setUser(User user) {
@@ -124,7 +139,7 @@ public class MainController {
 
     }
     @FXML
-    void place_book_orders(ActionEvent event) throws SQLException, InstantiationException, IllegalAccessException, ClassNotFoundException {
+    void place_book_orders(ActionEvent event)  {
     	FXMLLoader loader = new FXMLLoader(getClass().getResource("/PlaceGui.fxml"));
     	Pane p ;
     	try {
@@ -132,7 +147,7 @@ public class MainController {
     		PlaceController placeController = loader.getController();
     		placeController.setStage(myStage);
     		mainBorderPane.setCenter(p);
-    	}catch (IOException e) {
+    	}catch (IOException | InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 		}
     }
@@ -165,10 +180,80 @@ public class MainController {
 			e.printStackTrace();
 		}
     }
+
     @FXML
     void makeRebort(ActionEvent event) {
-
+    	
+    	Queries q = new Queries() ; 
+    	Database db = new Database() ; 
+    	try {
+			db.databaseConnector();
+			db.setQuery(q.TopSelling());
+	    	ResultSet r = db.executeRetrieveQuery();
+	    	
+	    	String ans = "" ; 
+	    	String num1 = ""  ; 
+	    	while(r.next()) {
+	    		
+	    		ans += r.getString("title") + " \r\n" ;
+	    		num1 += r.getString("number_of_sold") + " \r\n"; 
+	    	}
+	    	
+	    	db.setQuery(q.Topcustomer());
+	    	ResultSet r1 = db.executeRetrieveQuery();
+	    	String ans2 = "" ;
+	    	String num2 = "" ;
+ 	    	while(r1.next()) {
+	    		
+	    		ans2 += r1.getString("userName") + " \r\n"  ;
+	    		num2 += r1.getString("number_of_books") + " \r\n"; 
+	    	}
+ 	    	
+ 	    	db.setQuery(q.totalSalesBooks());
+	    	ResultSet r2 = db.executeRetrieveQuery();
+	    	String isbn = "" ; 
+ 	    	String name = "" ; 
+ 	    	String sales = "";
+ 	    	while(r2.next()) {
+ 	    		isbn += r2.getString("isbn") + " \r\n"   ; 
+ 	    		name += r2.getString("title") +" \r\n"   ; 
+ 	    		sales += r2.getString("total_sales") + " \r\n"   ; 
+ 	    		
+ 	    	}
+ 	    	
+ 	    	
+	    	JasperReport j;
+			try {
+				String filePath = new File("").getAbsolutePath();
+				//filePath  += "\\src" ; 
+				System.out.println(filePath);
+				j = JasperCompileManager.compileReport( filePath + "\\Report.jrxml" );
+				JRDataSource d = new JREmptyDataSource();
+				Map<String , Object> m = new HashMap<String, Object>() ; 
+				m.put("el7amd", ans2) ; 
+				m.put("pnum1", num2);
+				m.put("pnum2", num1);
+				m.put("secPar", ans) ; 
+				m.put("Pnum3", sales) ; 
+				m.put("thirPar", name);
+				m.put("isbnp", isbn);
+				JasperPrint jp = JasperFillManager.fillReport( j, m , d);
+				JasperExportManager.exportReportToPdfFile(jp , filePath + "\\report.pdf");
+		    	
+			} catch (JRException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+	    	System.out.println("done");
+	    	db.databaseClose();
+		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+    	
     }
+
     public Stage getMyStage()
     {
     	return myStage;

@@ -21,8 +21,22 @@ public class User {
 	private SimpleStringProperty shippingAddress;
 	private SimpleIntegerProperty userType;
 	private ArrayList<Book> booksInCart;
-	
 
+
+	public User() {
+		this.userName = new SimpleStringProperty();
+		this.password = new SimpleStringProperty();
+		this.firstName = new SimpleStringProperty(); 
+		this.lastName = new SimpleStringProperty(); 
+		this.email = new SimpleStringProperty() ; 
+		this.phone = new SimpleStringProperty() ; 
+		this.shippingAddress = new SimpleStringProperty(); 
+		this.userType = new SimpleIntegerProperty() ; 
+		booksInCart = new ArrayList<>() ;
+		
+	}
+	
+	
 	public User(ResultSet userData) throws SQLException {
 		ResultSetMetaData metaData = userData.getMetaData();
 		while(userData.next()) {
@@ -50,6 +64,7 @@ public class User {
 			}
 		}
 	}
+
 	public String getUserName() {
 		return userName.get();
 	}

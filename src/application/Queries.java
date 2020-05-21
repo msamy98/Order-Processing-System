@@ -29,14 +29,28 @@ public class Queries {
 
 
 
-	public String PlaceUpdateQuery (String isbn) {
-
-		String s = "UPDATE order_processing_system.book_orders SET place = \'1\' WHERE book_orders.ISBN = \'" + isbn + "\' ; " ;
-
-		return s ;
-
+	public String PlaceSearchQuery (String title) {
+		
+		String s = " select isbn , title , publisher_name ,  price  , quantity   \r\n" + 
+				" from order_processing_system.book_orders , order_processing_system.book \r\n" + 
+				" where place = 0 and book_orders.isbn = book.isbn " ; 
+		
+		if (title != null)
+			s += "book_orders.title = '" + title + "' " ; 
+		
+			s+= ";" ; 
+		
+		return s ; 
 	}
-
+	
+	public String PlaceUpdateQuery (String isbn) {
+		
+		String s = "update order_processing_system.book_orders\r\n" + 
+				"set place = 1 \r\n" + 
+				"where  book_orders.isbn = " + isbn + " ; " ; 
+		
+		return s ; 
+	}
 
 	public String ConfirmSearchQuery (String title) {
 
@@ -99,5 +113,39 @@ public class Queries {
 		 String query="UPDATE order_processing_system.book SET quantity =quantity -"+ num+" WHERE (ISBN = '" + isbn + "')";
 		return query;
 	 }
+	 
+		public String TopSelling() {
+			// TODO Auto-generated method stub
+			String s = "select book.title , sum(reporttable.quantity) as number_of_sold\r\n" + 
+					"from  reporttable , book\r\n" + 
+					"where ( buyingDate  > DATE_ADD(Now(), INTERVAL - 90 DAY)) and ( book.ISBN = reporttable.bookid)\r\n" + 
+					"group by  reporttable.bookId\r\n" + 
+					"order by number_of_sold DESC\r\n" + 
+					"limit 10; "; 
+			return s ; 
+		}
+		
+		public String  Topcustomer() {
+			
+			String s = "select reporttable.userName , sum(quantity) as number_of_books \r\n" + 
+					"from  order_processing_system.reporttable\r\n" + 
+					"where ( buyingDate  > DATE_ADD(Now(), INTERVAL - 90 DAY))\r\n" + 
+					"group by username \r\n" + 
+					"order by number_of_books DESC\r\n" + 
+					"limit 5; \r\n" ; 
+			
+			return s ; 
+		}
+		
+		public String totalSalesBooks() {
+			
+			String s = "select isbn , title , sum(reporttable.quantity * book.price) as total_sales \r\n" + 
+					"from order_processing_system.book , order_processing_system.reporttable\r\n" + 
+					"where   (book.isbn = reporttable.bookid)  and ( buyingDate  > DATE_ADD(Now(), INTERVAL - 30 DAY))\r\n" + 
+					"group by reporttable.bookId ;" ; 
+			
+			
+			return s; 
+		}
 
 }

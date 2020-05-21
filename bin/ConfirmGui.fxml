@@ -8,20 +8,20 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.allControllers.ConfirmController">
+<AnchorPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.allControllers.ConfirmController">
    <children>
-      <Pane layoutX="6.0" layoutY="24.0" prefHeight="344.0" prefWidth="529.0">
+      <Pane layoutY="-6.0" prefHeight="441.0" prefWidth="699.0">
          <children>
-            <TableView fx:id="TableOfOrder" layoutX="41.0" layoutY="65.0" prefHeight="200.0" prefWidth="448.0">
+            <TableView fx:id="TableOfOrder" layoutX="89.0" layoutY="109.0" prefHeight="224.0" prefWidth="538.0">
                <columns>
                   <TableColumn prefWidth="75.0" text="C1" />
                   <TableColumn prefWidth="75.0" text="C2" />
                </columns>
             </TableView>
-            <Button fx:id="ConfirmBt" layoutX="199.0" layoutY="287.0" mnemonicParsing="false" onAction="#updateConfirm" text="Confirm selected" />
-            <TextField fx:id="SearchText" layoutX="138.0" layoutY="14.0" prefHeight="31.0" prefWidth="252.0" />
-            <Label layoutX="51.0" layoutY="19.0" text="Book Title" />
-            <Button fx:id="searchBt" layoutX="397.0" layoutY="14.0" mnemonicParsing="false" onAction="#doingSearch" text="search" />
+            <Button fx:id="ConfirmBt" layoutX="293.0" layoutY="366.0" mnemonicParsing="false" onAction="#updateConfirm" text="Confirm selected" />
+            <TextField fx:id="SearchText" layoutX="232.0" layoutY="51.0" prefHeight="31.0" prefWidth="252.0" />
+            <Label layoutX="145.0" layoutY="56.0" text="Book Title" />
+            <Button fx:id="searchBt" layoutX="491.0" layoutY="51.0" mnemonicParsing="false" onAction="#doingSearch" text="search" />
             <Label fx:id="error_msg" layoutX="170.0" layoutY="322.0" prefHeight="17.0" prefWidth="189.0" visible="false" />
          </children>
       </Pane>

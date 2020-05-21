@@ -5,6 +5,7 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 public class Book_order {
+	
 	private SimpleIntegerProperty ISBN = new SimpleIntegerProperty();;
 	private SimpleStringProperty publisherName = new SimpleStringProperty();
 	private SimpleStringProperty title = new SimpleStringProperty();

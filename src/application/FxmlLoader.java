@@ -12,6 +12,7 @@ public class FxmlLoader {
 	private Pane view ;
 
 
+	@SuppressWarnings("unused")
 	public Pane getView (URL url ) {
 
 
