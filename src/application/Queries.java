@@ -81,12 +81,20 @@ public class Queries {
 	}
 	public String searchBookQuery(String cat, String value)
 	{
-		String s= "select isbn ,  title ,publishing_year, publisher_name , price , quantity , catagory.catagory_name\r\n" +
-                "from book  , catagory \r\n"+
-                "where book.book_catagory = catagory.id and book."+cat+"= '"+value+"'";
+		String s ="select book.isbn ,  title ,publishing_year, publisher_name , price , quantity ,GROUP_CONCAT(authortable.authorname ) as author, catagory.catagory_name\r\n" +
+				"                from book  , catagory ,authortable\r\n" +
+				"                where book.book_catagory = catagory.id and book."+cat+"= '"+value+"'and book.isbn=authortable.isbn \r\n" +
+				"                group by book.isbn";
 		return s;
 	}
-
+    public String searchBookQueryAuthor(String value)
+    {
+    	String s ="select book.isbn ,  title ,publishing_year, publisher_name , price , quantity ,GROUP_CONCAT(authortable.authorname ) as author, catagory.catagory_name\r\n" +
+				"                from book  , catagory ,authortable\r\n" +
+				"                where book.book_catagory = catagory.id and authortable.authorname= '"+value+"'and book.isbn=authortable.isbn \r\n" +
+				"                group by book.isbn";
+		return s;
+    }
 
 
 	public String placeSelectAll() {
@@ -115,7 +123,7 @@ public class Queries {
 	 }
 
 
-	 
+
 
 
 		public String TopSelling() {
@@ -165,7 +173,7 @@ public class Queries {
 		 String query = "SELECT * FROM order_processing_system.users WHERE user_name = \'" + user_name + "\';";
 		 return query;
 	 }
-	 
+
 	 public String modifyPersonalInfoUpdateUser(String user_name, String param, String value) {
 		 String query = "UPDATE order_processing_system.users SET " + param + "=\'" + value + "\' WHERE (user_name = \'" + user_name + "\');";
 		 return query;

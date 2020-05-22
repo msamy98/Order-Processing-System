@@ -185,9 +185,9 @@ public class MainController {
 
     @FXML
     void makeRebort(ActionEvent event) {
-    	
-    	Queries q = new Queries(); 
-    	Database db = new Database() ; 
+
+    	Queries q = new Queries();
+    	Database db = new Database() ;
     	try {
 			db.databaseConnector();
 			db.setQuery(q.TopSelling());
@@ -256,10 +256,10 @@ public class MainController {
 		}
 
 
-		} 
-    	
+		}
 
-    
+
+
 
     public Stage getMyStage()
     {
