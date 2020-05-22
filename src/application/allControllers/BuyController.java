@@ -295,6 +295,7 @@ public class BuyController {
 		catList.add("price");
 		catList.add("book_catagory");
 		catList.add("quantity");
+		catList.add("author");
 		search_cat.setItems(catList);
 		search_cat.setValue("ISBN");
 		price.setText("0");
@@ -334,6 +335,9 @@ public class BuyController {
 		TableColumn titleCol = new TableColumn("Title");
 		titleCol.setCellValueFactory(new PropertyValueFactory("title"));
 
+		TableColumn authorCol = new TableColumn("Authors");
+		authorCol.setCellValueFactory(new PropertyValueFactory("author"));
+
 		TableColumn publisherCol = new TableColumn("Publisher");
 		publisherCol.setCellValueFactory(new PropertyValueFactory("publisherName"));
 
@@ -349,6 +353,7 @@ public class BuyController {
 		List<TableColumn<Book, String>> columns = new ArrayList<TableColumn<Book, String>>();
 		columns.add(ISBNCol);
 		columns.add(titleCol);
+		columns.add(authorCol);
 		columns.add(publisherCol);
 		columns.add(priceCol);
 		columns.add(catCol);
@@ -398,6 +403,7 @@ public class BuyController {
 				book.setPrice(resultSet.getInt("price"));
 				book.setQuantity(resultSet.getInt("quantity"));
 				book.setBookCategory(resultSet.getString("catagory_name"));
+				book.setAuthor(resultSet.getString("author"));
 				book.setNoOfCopiesInCart(0);
 				bookList.add(book);
 			}
@@ -414,7 +420,14 @@ public class BuyController {
 		try {
 			db.databaseConnector();
 			Queries q = new Queries();
-			db.setQuery(q.searchBookQuery(cat, value));
+			if(cat=="author")
+			{
+				db.setQuery(q.searchBookQueryAuthor(value));
+			}
+			else
+			{
+				db.setQuery(q.searchBookQuery(cat, value));
+			}
 			ResultSet r = db.executeRetrieveQuery();
 			books_search.addAll(booksFormResultSet(r));
 			db.databaseClose();

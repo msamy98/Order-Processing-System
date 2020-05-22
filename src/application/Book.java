@@ -11,6 +11,7 @@ public class Book {
 	private SimpleStringProperty title;
 	private SimpleStringProperty publisherName;
 	private SimpleStringProperty publishingYear;
+	private SimpleStringProperty author;
 	private SimpleIntegerProperty price;
 	private SimpleStringProperty bookCategory;
 	private SimpleIntegerProperty quantity;
@@ -27,9 +28,10 @@ public class Book {
 		this.quantity = new SimpleIntegerProperty ();
 		this.threshold = new SimpleIntegerProperty ();
 		this.noOfCopiesInCart = new SimpleIntegerProperty();
+		this.author= new SimpleStringProperty();
 	}
 	public Book(int ISBN,String title,String publisherName, String publishingYear,int price,String bookCategory
-			,int quantity,int threshold,int noOfCopiesInCart)
+			,int quantity,int threshold,int noOfCopiesInCart,String author)
 	{
 		this.ISBN = new SimpleIntegerProperty (ISBN);
 		this.title = new SimpleStringProperty(title);
@@ -40,9 +42,10 @@ public class Book {
 		this.quantity = new SimpleIntegerProperty (quantity);
 		this.threshold = new SimpleIntegerProperty (threshold);
 		this.noOfCopiesInCart = new SimpleIntegerProperty(noOfCopiesInCart);
+		this.author= new SimpleStringProperty(author);
 	}
-		
-		
+
+
 
 
 	public int getISBN() {
@@ -98,6 +101,12 @@ public class Book {
 	}
 	public void setNoOfCopiesInCart(int noOfCopiesInCart) {
 		this.noOfCopiesInCart .set(noOfCopiesInCart);
+	}
+	public String getAuthor() {
+		return author.get();
+	}
+	public void setAuthor(String author) {
+		this.author.set(author);;
 	}
 
 }

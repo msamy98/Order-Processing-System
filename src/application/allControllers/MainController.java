@@ -21,6 +21,14 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import net.sf.jasperreports.engine.JRDataSource;
+import net.sf.jasperreports.engine.JREmptyDataSource;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
 
 
 
@@ -177,9 +185,9 @@ public class MainController {
 
     @FXML
     void makeRebort(ActionEvent event) {
-    	
-    	Queries q = new Queries(); 
-    	Database db = new Database() ; 
+
+    	Queries q = new Queries();
+    	Database db = new Database() ;
     	try {
 			db.databaseConnector();
 			db.setQuery(q.TopSelling());
@@ -248,10 +256,10 @@ public class MainController {
 		}
 
 
-		} 
-    	
+		}
 
-    
+
+
 
     public Stage getMyStage()
     {

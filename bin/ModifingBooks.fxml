@@ -30,6 +30,12 @@
                   <TextField fx:id="title" />
                </children>
             </HBox>
+            <HBox alignment="CENTER" prefHeight="46.0" prefWidth="394.0" spacing="85.0">
+               <children>
+                  <Label fx:id="authorsText" text="Author:" />
+                  <TextField fx:id="ISBN1" />
+               </children>
+            </HBox>
             <HBox alignment="CENTER" prefHeight="46.0" prefWidth="394.0" spacing="42.0">
                <children>
                   <Label text="Publisher Name:" />
