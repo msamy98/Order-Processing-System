@@ -16,12 +16,29 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Dumping events for database 'order_processing_system'
+-- Table structure for table `authortable`
 --
 
+DROP TABLE IF EXISTS `authortable`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `authortable` (
+  `isbn` int NOT NULL,
+  `authorname` varchar(45) NOT NULL,
+  PRIMARY KEY (`isbn`,`authorname`),
+  CONSTRAINT `isbnForauther` FOREIGN KEY (`isbn`) REFERENCES `book` (`ISBN`) ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
 --
--- Dumping routines for database 'order_processing_system'
+-- Dumping data for table `authortable`
 --
+
+LOCK TABLES `authortable` WRITE;
+/*!40000 ALTER TABLE `authortable` DISABLE KEYS */;
+INSERT INTO `authortable` VALUES (1,'ahemd'),(1,'mostafa'),(2,'ahemd'),(3,'mostafa'),(3,'ziad');
+/*!40000 ALTER TABLE `authortable` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -32,4 +49,4 @@
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-05-22  6:57:03
+-- Dump completed on 2020-05-22  6:57:02

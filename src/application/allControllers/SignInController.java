@@ -67,7 +67,6 @@ public class SignInController {
 		    				mainController.modify.setVisible(true);
 		    				mainController.confirmBt.setVisible(true);
 		    				mainController.reportBt.setVisible(true);
-		    				System.out.println(manger.getUserName());
 		    			}
 		    			else {
 		    				ResultSet r = database.executeRetrieveQuery();

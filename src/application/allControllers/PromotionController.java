@@ -53,7 +53,6 @@ public class PromotionController {
     			db.databaseConnector();
 				Queries q = new Queries() ;
 				String s = q.promotionSearchQuery(userSearchText.getText()) ;
-				//System.out.println(s);
 				db.setQuery(s) ;
 				ResultSet userData = db.executeRetrieveQuery() ;
 				ListOfUser(proList , userData) ;
@@ -105,13 +104,11 @@ public class PromotionController {
   			db.databaseConnector();
   			Queries q = new Queries() ;
   			String s = q.promotionSearchQuery(null) ;
-  			//System.out.println(s);
   			db.setQuery(s) ;
   			ResultSet userData = db.executeRetrieveQuery() ;
   			ListOfUser(proList , userData) ;
   			db.databaseClose();
   		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException e) {
-  			// TODO Auto-generated catch block
   			e.printStackTrace();
   		}
           userTable.setItems(proList);
@@ -155,8 +152,7 @@ public class PromotionController {
         while(userData.next()) {
             for(int i=1 ; i<=metaData.getColumnCount() ; i++) {
                 switch (i) {
-                case 1: //System.out.println(userData.getString(i));
-                	u.setUserName(userData.getString(i)) ;
+                case 1: u.setUserName(userData.getString(i)) ;
                     break;
                 case 2: u.setFirstName( userData.getString(i));
                     break;

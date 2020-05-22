@@ -123,12 +123,12 @@ public class EditPersonalInfoController {
     }
     public Stage getMyStage()
     {
-    	error_msg.setVisible(false);
     	return myStage;
     }
 
     public void  setStage(Stage stage)
     {
+    	error_msg.setVisible(false);
     	myStage =stage;
     }
 

@@ -3,7 +3,10 @@ package application.allControllers;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import application.Database;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -20,7 +23,7 @@ public class ModifingBooks {
 	private TextField title;
 
 	@FXML
-	private TextField publisher_name;
+	private ComboBox<String> publisher_name;
 
 	@FXML
 	private TextField publisher_year;
@@ -29,7 +32,7 @@ public class ModifingBooks {
 	private TextField price;
 
 	@FXML
-	private TextField book_category;
+	private ComboBox<String> book_category;
 
 	@FXML
 	private TextField quantity;
@@ -53,20 +56,34 @@ public class ModifingBooks {
 			try {
 				if(!org.apache.commons.lang3.StringUtils.isBlank(ISBN.getText()) &&
 			    		   !org.apache.commons.lang3.StringUtils.isBlank(title.getText())&&
-			    				!org.apache.commons.lang3.StringUtils.isBlank(publisher_name.getText())&&
+			    				!org.apache.commons.lang3.StringUtils.isBlank(publisher_name.getValue())&&
 			    				!org.apache.commons.lang3.StringUtils.isBlank(publisher_year.getText())&&
 			    				!org.apache.commons.lang3.StringUtils.isBlank(price.getText())&&
-			    				!org.apache.commons.lang3.StringUtils.isBlank(book_category.getText())&&
 			    				!org.apache.commons.lang3.StringUtils.isBlank(quantity.getText())&&
 			    				!org.apache.commons.lang3.StringUtils.isBlank(threshold.getText())) {
+								int category = 1;
+								switch(book_category.getValue()) {
+									case "Science" : category = 1;
+										break;
+									case "Art" : category = 2;
+										break;
+									case "Religion" : category = 3;
+										break;
+									case "Geography" : category = 5;
+										break;
+									case "History" : category = 4;
+										break;
+									default:
+										break;
+								}
 						    	database.setQuery("INSERT INTO order_processing_system.book(ISBN,title,publisher_name,publishing_year,price,"
 						    			+ "book_catagory,quantity,threshold) VALUES("
 						    			+ "\'" + ISBN.getText() + "\',"
 						    			+ "\'" + title.getText() + "\',"
-						    			+ "\'" + publisher_name.getText() + "\',"
+						    			+ "\'" + publisher_name.getValue() + "\',"
 						    			+ "\'" + publisher_year.getText() + "\',"
 						    			+ "\'" + price.getText() + "\',"
-						    			+ "\'" + book_category.getText() + "\',"
+						    			+ "\'" + category + "\',"
 						    			+ "\'" + quantity.getText() + "\',"
 						    			+ "\'" + threshold.getText() + "\'" + ");");
 						    	database.executeUpdateQuery();
@@ -79,6 +96,7 @@ public class ModifingBooks {
 			}catch (SQLException e) {
 				error_msg.setText(e.getMessage());
 				error_msg.setVisible(true);
+				System.out.println(e.getMessage());
 			}
 		}
 		else {
@@ -96,8 +114,8 @@ public class ModifingBooks {
 					database.setQuery("UPDATE order_processing_system.book SET title = " + "\'" + title.getText() + "\'" + "WHERE (ISBN = " + "\'" + ISBN.getText() + "\');");
 					database.executeUpdateQuery();
 				}
-				if (!org.apache.commons.lang3.StringUtils.isBlank(publisher_name.getText())) {
-					database.setQuery("UPDATE order_processing_system.book SET publisher_name = " + "\'" + publisher_name.getText() + "\'" + "WHERE (ISBN = " + "\'" + ISBN.getText() + "\');");
+				if (!org.apache.commons.lang3.StringUtils.isBlank(publisher_name.getValue())) {
+					database.setQuery("UPDATE order_processing_system.book SET publisher_name = " + "\'" + publisher_name.getValue() + "\'" + "WHERE (ISBN = " + "\'" + ISBN.getText() + "\');");
 					database.executeUpdateQuery();
 				}
 				if (!org.apache.commons.lang3.StringUtils.isBlank(publisher_year.getText())) {
@@ -108,8 +126,23 @@ public class ModifingBooks {
 					database.setQuery("UPDATE order_processing_system.book SET book.price = " + "\'" + price.getText() + "\'" + "WHERE (ISBN = " + "\'" + ISBN.getText() + "\');");
 					database.executeUpdateQuery();
 				}
-				if (!org.apache.commons.lang3.StringUtils.isBlank(book_category.getText())) {
-					database.setQuery("UPDATE order_processing_system.book SET book_catagory = " + "\'" + book_category.getText() + "\'" + "WHERE (ISBN = " + "\'" + ISBN.getText() + "\');");
+				if (!org.apache.commons.lang3.StringUtils.isBlank(book_category.getValue())) {
+					int category = 1;
+					switch(book_category.getValue()) {
+						case "Science" : category = 1;
+							break;
+						case "Art" : category = 2;
+							break;
+						case "Religion" : category = 3;
+							break;
+						case "Geography" : category = 5;
+							break;
+						case "History" : category = 4;
+							break;
+						default:
+							break;
+					}
+					database.setQuery("UPDATE order_processing_system.book SET book_catagory = " + "\'" + category + "\'" + "WHERE (ISBN = " + "\'" + ISBN.getText() + "\');");
 					database.executeUpdateQuery();
 				}
 				if (!org.apache.commons.lang3.StringUtils.isBlank(quantity.getText())) {
@@ -140,8 +173,48 @@ public class ModifingBooks {
     	return myStage;
     }
 
-    public void  setStage(Stage stage)
+    public void  setStage(Stage stage) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException
     {
     	myStage =stage;
+    	ObservableList<String> catList = FXCollections.observableArrayList();
+		catList.add("Art");
+		catList.add("Geography");
+		catList.add("History");
+		catList.add("Religion");
+		catList.add("Science");
+		book_category.setItems(catList);
+		book_category.setValue("Art");
+		
+		ObservableList<String> pubList = FXCollections.observableArrayList();
+		database.databaseConnector();
+		database.setQuery("SELECT * FROM order_processing_system.publisher;");
+		ResultSet result = database.executeRetrieveQuery();
+		while(result.next()) {
+		pubList.add(result.getString("PUBLISHER_NAME"));
+		publisher_name.setValue(result.getString("PUBLISHER_NAME"));
+		}
+		publisher_name.setItems(pubList);
+		
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

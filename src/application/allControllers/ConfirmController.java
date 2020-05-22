@@ -95,11 +95,6 @@ public class ConfirmController {
 					Queries q = new Queries() ;
 					database.setQuery(q.confirmUpdateQuery(ISBN));
 					int ok = database.executeUpdateQuery() ;
-					if (ok != 0 )
-						System.out.println("done");
-					else {
-						System.out.println("error");
-					}
 					database.setQuery(q.confirmDeleteQuery(ISBN));
 					database.executeUpdateQuery();
 					tableViewing(null);

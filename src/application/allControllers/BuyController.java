@@ -269,6 +269,9 @@ public class BuyController {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			error_msg.setText("no enough in stock");
+            error_msg.setVisible(true);
+            error_msg.setTextFill(Color.RED);
 		}
 
 	}

@@ -147,7 +147,7 @@ public class MainController {
     }
 
     @FXML
-    void modifyBooks(ActionEvent event) {
+    void modifyBooks(ActionEvent event) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
     	FXMLLoader loader = new FXMLLoader(getClass().getResource("/ModifingBooks.fxml"));
     	Pane p ;
     	try {
@@ -177,7 +177,7 @@ public class MainController {
 
     @FXML
     void makeRebort(ActionEvent event) {
-    	/*
+    	
     	Queries q = new Queries(); 
     	Database db = new Database() ; 
     	try {
@@ -248,7 +248,7 @@ public class MainController {
 		}
 
 
-		*/} 
+		} 
     	
 
     
