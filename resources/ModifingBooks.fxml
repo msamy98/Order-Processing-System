@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.allControllers.ModifingBooks">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.allControllers.ModifingBooks">
    <children>
       <VBox layoutX="3.0" layoutY="72.0" prefHeight="374.0" prefWidth="394.0">
          <children>
@@ -33,7 +33,7 @@
             <HBox alignment="CENTER" prefHeight="46.0" prefWidth="394.0" spacing="85.0">
                <children>
                   <Label fx:id="authorsText" text="Author:" />
-                  <TextField fx:id="ISBN1" />
+                  <TextField fx:id="authorText" />
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="46.0" prefWidth="394.0" spacing="42.0">

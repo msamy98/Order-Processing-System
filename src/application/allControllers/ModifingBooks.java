@@ -42,6 +42,9 @@ public class ModifingBooks {
 
 	@FXML
 	private Label error_msg;
+	
+    @FXML
+    private TextField authorText;
 
 	private Stage myStage;
 
@@ -60,7 +63,9 @@ public class ModifingBooks {
 			    				!org.apache.commons.lang3.StringUtils.isBlank(publisher_year.getText())&&
 			    				!org.apache.commons.lang3.StringUtils.isBlank(price.getText())&&
 			    				!org.apache.commons.lang3.StringUtils.isBlank(quantity.getText())&&
-			    				!org.apache.commons.lang3.StringUtils.isBlank(threshold.getText())) {
+			    				!org.apache.commons.lang3.StringUtils.isBlank(threshold.getText()) && 
+			    				!org.apache.commons.lang3.StringUtils.isBlank(authorText.getText()))  {
+					
 								int category = 1;
 								switch(book_category.getValue()) {
 									case "Science" : category = 1;
@@ -87,6 +92,14 @@ public class ModifingBooks {
 						    			+ "\'" + quantity.getText() + "\',"
 						    			+ "\'" + threshold.getText() + "\'" + ");");
 						    	database.executeUpdateQuery();
+						    	
+						    	String s = authorText.getText() ; 
+						    	s.replaceAll("\\s+","");
+						    	String[] arrOfStr = s.split(",");
+						    	for ( int i = 0 ; i < arrOfStr.length ; i++) {
+						    		database.setQuery("insert into authortable value (  "+ ISBN.getText() +" , \'"+ arrOfStr[i]  +"\' );");
+						    		database.executeUpdateQuery();
+						    	}
 				}
 				else {
 					error_msg.setText("Enter all the fields");
@@ -152,6 +165,17 @@ public class ModifingBooks {
 				if (!org.apache.commons.lang3.StringUtils.isBlank(threshold.getText())) {
 					database.setQuery("UPDATE order_processing_system.book SET threshold = " + "\'" + threshold.getText() + "\'" + "WHERE (ISBN = " + "\'" + ISBN.getText() + "\');");
 					database.executeUpdateQuery();
+				}
+				if (!org.apache.commons.lang3.StringUtils.isBlank(authorText.getText())) {
+					String s = authorText.getText() ; 
+			    	s.replaceAll("\\s+","");
+			    	String[] arrOfStr = s.split(",");
+			    	database.setQuery("delete from order_processing_system.authortable where isbn = "+ ISBN.getText() +" ; ");
+			    	database.executeUpdateQuery();
+			    	for ( int i = 0 ; i < arrOfStr.length ; i++) {
+			    		database.setQuery("insert into authortable value (  "+ ISBN.getText() +" , \'"+ arrOfStr[i]  +"\' );");
+			    		database.executeUpdateQuery();
+			    	}
 				}
 				if (!org.apache.commons.lang3.StringUtils.isBlank(newISBN.getText())) {
 					database.setQuery("UPDATE order_processing_system.book SET ISBN = " + "\'" + newISBN.getText() + "\'" + "WHERE (ISBN = " + "\'" + ISBN.getText() + "\');");
