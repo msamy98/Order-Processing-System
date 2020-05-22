@@ -56,23 +56,26 @@ public class SignInController {
 						root = fxmlLoader.load();
 						MainController mainController = fxmlLoader.getController();
 						if(result.getInt("user_type") == 0) {
-		    				Manger manger = new Manger(result);
-		    				System.out.println(manger.getUserName());
+							ResultSet r = database.executeRetrieveQuery();
+		    				Manger manger = new Manger(r);
 		    				mainController.setUser(manger);
 		    				result.previous();
+		    				result.next();
 		    				mainController.label1.setText("WELCOME " + result.getString("first_name")+" " + result.getString("last_name")+ " TO OUR");
 		    				mainController.porBt.setVisible(true);
 		    				mainController.placeBt.setVisible(true);
 		    				mainController.modify.setVisible(true);
 		    				mainController.confirmBt.setVisible(true);
 		    				mainController.reportBt.setVisible(true);
+		    				System.out.println(manger.getUserName());
 		    			}
 		    			else {
-		    				User customer = new User(result);
+		    				ResultSet r = database.executeRetrieveQuery();
+		    				User customer = new User(r);
 		    				mainController.setUser(customer);
 		    				result.previous();
+		    				result.next();
 		    				mainController.label1.setText("WELCOME " + result.getString("first_name")+" " + result.getString("last_name")+ " TO OUR");
-		    				//mainController.label1.setAlignment(mainController..CENTER);
 		    				mainController.porBt.setVisible(false);
 		    				mainController.placeBt.setVisible(false);
 		    				mainController.modify.setVisible(false);
@@ -86,7 +89,6 @@ public class SignInController {
 						mainController.setStage(myStage);
 						myStage.show();
 					} catch (IOException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 	    		}
@@ -123,7 +125,6 @@ public class SignInController {
 			signUpController.setStage(myStage);
 			myStage.show();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

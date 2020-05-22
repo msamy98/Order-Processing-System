@@ -16,29 +16,12 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `publisher`
+-- Dumping events for database 'order_processing_system'
 --
 
-DROP TABLE IF EXISTS `publisher`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `publisher` (
-  `PUBLISHER_NAME` varchar(50) NOT NULL,
-  `ADDRESS` varchar(255) NOT NULL,
-  `TEL` varchar(15) DEFAULT NULL,
-  PRIMARY KEY (`PUBLISHER_NAME`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
 --
--- Dumping data for table `publisher`
+-- Dumping routines for database 'order_processing_system'
 --
-
-LOCK TABLES `publisher` WRITE;
-/*!40000 ALTER TABLE `publisher` DISABLE KEYS */;
-INSERT INTO `publisher` VALUES ('Ziad Taha','Ard El Abtal','011-5537-6877'),('zoom','124Th behind chair factory','2124-5676-8798'),('zoooom','124Th behind chair factory','2124-5676-8798');
-/*!40000 ALTER TABLE `publisher` ENABLE KEYS */;
-UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -49,4 +32,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-05-22  1:16:44
+-- Dump completed on 2020-05-22  1:16:46

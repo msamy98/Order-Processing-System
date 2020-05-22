@@ -73,9 +73,9 @@
             <Button mnemonicParsing="false" onAction="#modify" text="Modify Existing One" />
          </children>
       </HBox>
-      <HBox alignment="CENTER" layoutX="94.0" layoutY="489.0" prefHeight="25.0" prefWidth="200.0">
+      <HBox alignment="CENTER" layoutX="5.0" layoutY="489.0" prefHeight="25.0" prefWidth="394.0">
          <children>
-            <Label fx:id="error_msg" textFill="RED" visible="false" />
+            <Label fx:id="error_msg" alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="399.0" textFill="RED" visible="false" />
          </children>
       </HBox>
    </children>

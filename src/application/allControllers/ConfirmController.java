@@ -79,8 +79,16 @@ public class ConfirmController {
     	TableViewSelectionModel<Book_order> selectedRow = TableOfOrder.getSelectionModel();
     	selectedRow.setSelectionMode(SelectionMode.SINGLE);
     	ObservableList<Book_order> selectedItems = selectedRow.getSelectedItems();
+    	String ISBN = "";
+    	if(selectedItems.size()>0) {
 	    	Integer isbn = selectedItems.get(0).getISBN();
-	    	String ISBN = isbn.toString() ;
+	    	ISBN = isbn.toString() ;
+    	}else {
+	    	ISBN = "";
+	    	error_msg.setText("Nothing to Confirm!!");
+			error_msg.setTextFill(Color.RED);
+			error_msg.setVisible(true);
+    	}
 	    	if (ISBN != "" ) {
 	    		try {
 					database.databaseConnector();

@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.19, for Win64 (x86_64)
 --
--- Host: 127.0.0.1    Database: order_processing_system
+-- Host: localhost    Database: order_processing_system
 -- ------------------------------------------------------
 -- Server version	8.0.19
 
@@ -41,9 +41,49 @@ CREATE TABLE `book` (
 
 LOCK TABLES `book` WRITE;
 /*!40000 ALTER TABLE `book` DISABLE KEYS */;
-INSERT INTO `book` VALUES (1,'islam','rsla',2020,10,1,2,3),(2,'gehad','rsla',2020,20,1,50,2),(4,'fff','rsla',2020,10,1,2,3),(10,'gannha','rsla',2020,30,1,49,4),(11,'fff','rsla',2020,10,1,2,3),(222,'hjhj','uikhjk',2000,6000,5,555,5),(456,'foo','foobar',2005,1000,5,1000000,500),(545,'lkjh','kljh',2002,455,5,545454,555),(4345,'zecola','gfj',2019,534,5,5444,54);
+INSERT INTO `book` VALUES (1,'islam','rsla',2020,10,1,2,3),(2,'gehad','rsla',2020,20,1,2,2),(3,'gannha','rsla',2020,30,1,49,4),(4,'fff','rsla',2020,10,1,3,3),(5,'fff','rsla',2020,10,1,3,3),(13,'mmm','mmm',2020,20,3,6,3);
 /*!40000 ALTER TABLE `book` ENABLE KEYS */;
 UNLOCK TABLES;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`manger`@`localhost`*/ /*!50003 TRIGGER `check_not_negative` BEFORE UPDATE ON `book` FOR EACH ROW begin
+	IF new.quantity <0 THEN 
+	  signal sqlstate "45000" set message_text ="quantity ";
+    end if;
+end */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`manger`@`localhost`*/ /*!50003 TRIGGER `place_order` AFTER UPDATE ON `book` FOR EACH ROW begin
+	IF new.quantity <new.threshold and old.quantity>=old.threshold
+    THEN 
+	  insert into book_orders( ISBN , order_date , place ) 
+      values(new.ISBN,now() , 0);
+    end if;
+end */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -54,4 +94,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-05-17 18:03:36
+-- Dump completed on 2020-05-22  1:16:44

@@ -1,8 +1,6 @@
 package application.allControllers;
 
-/**
-	 * Sample Skeleton for 'custmorGui.fxml' Controller Class
-	 */
+/*** Sample Skeleton for 'custmorGui.fxml' Controller Class ***/
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -123,7 +121,9 @@ public class BuyController {
 				delete_from_cart(event);
 			}
 		} catch (Exception e) {
-			System.out.println("error");
+			error_msg.setText(e.getMessage());
+			error_msg.setTextFill(Color.RED);
+			error_msg.setVisible(true);
 		}
 	}
 
@@ -157,7 +157,9 @@ public class BuyController {
 				price.setText(Integer.toString(tPrice));
 			}
 		} catch (Exception e) {
-			System.out.println("error");
+			error_msg.setText(e.getMessage());
+			error_msg.setTextFill(Color.RED);
+			error_msg.setVisible(true);
 		}
 	}
 
@@ -240,7 +242,6 @@ public class BuyController {
 			db.databaseConnector();
 			Calendar cal = Calendar.getInstance();
             String timeStamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Timestamp(cal.getTimeInMillis()));
-			System.out.println(timeStamp+" "+ user.getUserName());
             Queries q = new Queries();
 			for (Book b : cart) {
 				db.setQuery(q.checkOutCart(b.getISBN(), b.getNoOfCopiesInCart()));
@@ -432,8 +433,7 @@ public class BuyController {
 	}
 	public void setUser(User user)
 	{
-		System.out.println(user.getUserName());
-		System.out.println(user.getUserType());
+		error_msg.setVisible(false);
 		this.user=user;
 	}
 }

@@ -20,7 +20,13 @@ public class User {
 	private SimpleStringProperty phone= new SimpleStringProperty();
 	private SimpleStringProperty shippingAddress= new SimpleStringProperty();
 	private SimpleIntegerProperty userType = new SimpleIntegerProperty();
-	private ArrayList<Book> booksInCart;
+	private ArrayList<Book> booksInCart = new ArrayList<>();
+
+
+	public User() {
+	}
+	
+
 	
 
 	public User(ResultSet userData) throws SQLException {

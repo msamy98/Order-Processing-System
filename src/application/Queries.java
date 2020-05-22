@@ -5,7 +5,7 @@ public class Queries {
 
 	public String  promotionSearchQuery (String userName) {
 
-		String s = "select user_name , first_name , last_name , e_mail , shipping_address " +
+		String s = "select * " +
 				"from order_processing_system.users " +
 				"where user_type != 0  " ;
 
@@ -110,9 +110,13 @@ public class Queries {
 	 }
 	 public String checkOutCart(int isbn,int num)
 	 {
-		 String query="UPDATE order_processing_system.book SET quantity =quantity -"+ num+" WHERE (ISBN = '" + isbn + "')";
+		 String query="UPDATE order_processing_system.book SET quantity =quantity -"+ num+" WHERE (ISBN = '" + isbn + "');";
 		return query;
 	 }
+
+
+	 
+
 
 		public String TopSelling() {
 			// TODO Auto-generated method stub
@@ -156,5 +160,16 @@ public class Queries {
 	                 "'"+q+"')";
 	        return query;
 	     }
+
+	 public String modifyPersonalInfoUser(String user_name) {
+		 String query = "SELECT * FROM order_processing_system.users WHERE user_name = \'" + user_name + "\';";
+		 return query;
+	 }
+	 
+	 public String modifyPersonalInfoUpdateUser(String user_name, String param, String value) {
+		 String query = "UPDATE order_processing_system.users SET " + param + "=\'" + value + "\' WHERE (user_name = \'" + user_name + "\');";
+		 return query;
+	 }
+
 
 }

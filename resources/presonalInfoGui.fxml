@@ -9,13 +9,13 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.allControllers.EditPersonalInfoController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.allControllers.EditPersonalInfoController">
    <children>
-      <VBox layoutX="3.0" layoutY="72.0" prefHeight="374.0" prefWidth="394.0">
+      <VBox alignment="CENTER" layoutX="3.0" layoutY="72.0" prefHeight="374.0" prefWidth="394.0">
          <children>
-            <HBox prefHeight="46.0" prefWidth="394.0">
+            <HBox alignment="CENTER" prefHeight="46.0" prefWidth="394.0">
                <children>
-                  <Label text="user_name" />
+                  <Label text="User Name:" />
                   <TextField fx:id="user_name">
                      <HBox.margin>
                         <Insets left="60.0" />
@@ -26,9 +26,9 @@
                   <Insets />
                </VBox.margin>
             </HBox>
-            <HBox prefHeight="46.0" prefWidth="394.0">
+            <HBox alignment="CENTER" prefHeight="46.0" prefWidth="394.0">
                <children>
-                  <Label text="first_name" />
+                  <Label text="First Name:" />
                   <TextField fx:id="first_name">
                      <HBox.margin>
                         <Insets left="61.0" />
@@ -36,9 +36,9 @@
                   </TextField>
                </children>
             </HBox>
-            <HBox prefHeight="46.0" prefWidth="394.0">
+            <HBox alignment="CENTER" prefHeight="46.0" prefWidth="394.0">
                <children>
-                  <Label text="last_name" />
+                  <Label text="Last Name:" />
                   <TextField fx:id="last_name">
                      <HBox.margin>
                         <Insets left="62.0" />
@@ -46,9 +46,9 @@
                   </TextField>
                </children>
             </HBox>
-            <HBox prefHeight="46.0" prefWidth="394.0">
+            <HBox alignment="CENTER" prefHeight="46.0" prefWidth="394.0" spacing="3.0">
                <children>
-                  <Label text="password" />
+                  <Label text="Password:" />
                   <PasswordField fx:id="pass_word">
                      <HBox.margin>
                         <Insets left="63.0" />
@@ -56,9 +56,9 @@
                   </PasswordField>
                </children>
             </HBox>
-            <HBox prefHeight="46.0" prefWidth="394.0">
+            <HBox alignment="CENTER" prefHeight="46.0" prefWidth="394.0" spacing="12.0">
                <children>
-                  <Label text="confirm password" />
+                  <Label text="Confirm Password:" />
                   <PasswordField fx:id="confirm_pass_word">
                      <HBox.margin>
                         <Insets left="8.0" />
@@ -66,9 +66,9 @@
                   </PasswordField>
                </children>
             </HBox>
-            <HBox prefHeight="46.0" prefWidth="394.0">
+            <HBox alignment="CENTER" prefHeight="46.0" prefWidth="394.0" spacing="10.0">
                <children>
-                  <Label text="e-mail address" />
+                  <Label text="e-mail address:" />
                   <TextField fx:id="e_mail">
                      <HBox.margin>
                         <Insets left="28.0" />
@@ -76,9 +76,9 @@
                   </TextField>
                </children>
             </HBox>
-            <HBox prefHeight="46.0" prefWidth="394.0">
+            <HBox alignment="CENTER" prefHeight="46.0" prefWidth="394.0" spacing="12.0">
                <children>
-                  <Label text="shipping address" />
+                  <Label text="Shipping Address:" />
                   <TextField fx:id="address">
                      <HBox.margin>
                         <Insets left="11.0" />
@@ -86,9 +86,9 @@
                   </TextField>
                </children>
             </HBox>
-            <HBox prefHeight="46.0" prefWidth="394.0">
+            <HBox alignment="CENTER" prefHeight="46.0" prefWidth="394.0">
                <children>
-                  <Label text="phone" />
+                  <Label text="Phone:" />
                   <TextField fx:id="phone">
                      <HBox.margin>
                         <Insets left="80.0" />
@@ -101,7 +101,7 @@
             <Insets left="18.0" />
          </padding>
       </VBox>
-      <Button fx:id="save_btn" layoutX="14.0" layoutY="465.0" mnemonicParsing="false" onAction="#save_edits" prefHeight="31.0" prefWidth="140.0" text="save" />
-      <Button fx:id="quit_btn" layoutX="246.0" layoutY="465.0" mnemonicParsing="false" onAction="#quit" prefHeight="31.0" prefWidth="140.0" text="quit" />
+      <Button fx:id="save_btn" layoutX="130.0" layoutY="471.0" mnemonicParsing="false" onAction="#save_edits" prefHeight="31.0" prefWidth="140.0" text="save" />
+      <Label fx:id="error_msg" alignment="CENTER" contentDisplay="CENTER" layoutX="1.0" layoutY="520.0" prefHeight="17.0" prefWidth="394.0" text="Label" visible="false" />
    </children>
 </AnchorPane>

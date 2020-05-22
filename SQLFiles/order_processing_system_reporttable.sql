@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.19, for Win64 (x86_64)
 --
--- Host: 127.0.0.1    Database: order_processing_system
+-- Host: localhost    Database: order_processing_system
 -- ------------------------------------------------------
 -- Server version	8.0.19
 
@@ -24,7 +24,7 @@ DROP TABLE IF EXISTS `reporttable`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `reporttable` (
   `bookId` int NOT NULL,
-  `buyingDate` date NOT NULL,
+  `buyingDate` datetime NOT NULL,
   `userName` varchar(45) NOT NULL,
   `Quantity` int NOT NULL,
   PRIMARY KEY (`bookId`,`buyingDate`,`userName`),
@@ -38,6 +38,7 @@ CREATE TABLE `reporttable` (
 
 LOCK TABLES `reporttable` WRITE;
 /*!40000 ALTER TABLE `reporttable` DISABLE KEYS */;
+INSERT INTO `reporttable` VALUES (1,'2020-04-20 10:10:10','ahemd',3),(1,'2020-05-02 10:10:10','asdf',4),(1,'2020-05-02 10:10:10','hgfs',4),(1,'2020-05-02 10:10:10','mofggstafa',4),(1,'2020-05-02 10:10:10','mosdfstafa',4),(1,'2020-05-02 10:10:10','mostafa',4),(1,'2020-05-02 10:10:10','mostghafa',4),(1,'2020-05-10 10:10:10','mostafa',3),(1,'2020-05-15 10:10:10','ahemd',3),(1,'2020-05-22 00:28:35','mostafa',3),(2,'2020-03-01 10:10:10','ahemd',3),(2,'2020-04-12 10:10:10','mostafa',10),(2,'2020-05-16 10:10:10','ahemd',6),(3,'2020-02-25 10:10:10','ahemd',3),(3,'2020-05-10 10:10:10','mostafa',3);
 /*!40000 ALTER TABLE `reporttable` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -50,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-05-17 18:03:38
+-- Dump completed on 2020-05-22  1:16:46

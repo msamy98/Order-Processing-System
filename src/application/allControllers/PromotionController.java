@@ -5,6 +5,9 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.naming.spi.DirStateFactory.Result;
+
 import application.Database;
 import application.Queries;
 import application.User;
@@ -77,9 +80,6 @@ public class PromotionController {
 				int ok = db.executeUpdateQuery() ;
 				if (ok != 0 ) {
 					proList.remove(ix);
-					System.out.println("done");
-				}else {
-					System.out.println("error");
 				}
 				db.databaseClose();
 			} catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException e) {
@@ -101,7 +101,20 @@ public class PromotionController {
     	//user_name , first_name , last_name , e_mail , shipping_address
 
     	proList = FXCollections.observableArrayList();
-    	userTable.setItems(proList);
+    	  try {
+  			db.databaseConnector();
+  			Queries q = new Queries() ;
+  			String s = q.promotionSearchQuery(null) ;
+  			//System.out.println(s);
+  			db.setQuery(s) ;
+  			ResultSet userData = db.executeRetrieveQuery() ;
+  			ListOfUser(proList , userData) ;
+  			db.databaseClose();
+  		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException e) {
+  			// TODO Auto-generated catch block
+  			e.printStackTrace();
+  		}
+          userTable.setItems(proList);
 
         List<TableColumn<User,String>> columnsCart =new ArrayList<TableColumn<User,String>>();
         TableColumn user_name = new TableColumn("user_name");
@@ -131,27 +144,15 @@ public class PromotionController {
 
         userTable.getColumns().setAll(columnsCart);
 
-        try {
-			db.databaseConnector();
-			Queries q = new Queries() ;
-			String s = q.promotionSearchQuery(null) ;
-			//System.out.println(s);
-			db.setQuery(s) ;
-			ResultSet userData = db.executeRetrieveQuery() ;
-			ListOfUser(proList , userData) ;
-			db.databaseClose();
-		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+      
     }
 
     private void ListOfUser(ObservableList<User> proList , ResultSet userData  ) throws SQLException {
 
     	proList.clear();
         ResultSetMetaData metaData = userData.getMetaData();
+        User u = new User() ;
         while(userData.next()) {
-        	User u = new User(userData) ;
             for(int i=1 ; i<=metaData.getColumnCount() ; i++) {
                 switch (i) {
                 case 1: //System.out.println(userData.getString(i));
@@ -170,9 +171,9 @@ public class PromotionController {
                 }
             }
             proList.add(u) ;
+            u = new User() ;
         }
-
-
+        userData.close();
     }
 
     /* private void ListOfUser(ObservableList<User> proList , ResultSet userData  ) throws SQLException {
