@@ -13,29 +13,34 @@
    <children>
       <BorderPane fx:id="mainBorderPane" prefHeight="600.0" prefWidth="1050.0">
          <left>
-            <VBox prefHeight="400.0" prefWidth="121.0" BorderPane.alignment="CENTER">
+            <VBox prefHeight="580.0" prefWidth="133.0" BorderPane.alignment="CENTER">
                <children>
-                  <Button fx:id="logOutBt" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#on_logout" prefHeight="31.0" prefWidth="128.0" text="log out">
+                  <Button fx:id="logOutBt" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#on_logout" prefHeight="31.0" prefWidth="128.0" text="Log Out">
                      <VBox.margin>
                         <Insets top="10.0" />
                      </VBox.margin>
                   </Button>
-                  <Button fx:id="editInfoBut" mnemonicParsing="false" onAction="#edit_info_screen" prefHeight="31.0" prefWidth="128.0" text="edit info">
+                  <Button fx:id="editInfoBut" mnemonicParsing="false" onAction="#edit_info_screen" prefHeight="31.0" prefWidth="128.0" text="Edit your INFO">
                      <VBox.margin>
                         <Insets top="10.0" />
                      </VBox.margin>
                   </Button>
-                  <Button fx:id="bookSearch" layoutX="10.0" layoutY="61.0" mnemonicParsing="false" onAction="#Buy_screen" prefHeight="31.0" prefWidth="128.0" text="book search">
+                  <Button fx:id="bookSearch" layoutX="10.0" layoutY="61.0" mnemonicParsing="false" onAction="#Buy_screen" prefHeight="31.0" prefWidth="128.0" text="Book Search">
                      <VBox.margin>
                         <Insets top="10.0" />
                      </VBox.margin>
                   </Button>
-                  <Button fx:id="porBt" mnemonicParsing="false" onAction="#pro_screen" prefHeight="31.0" prefWidth="128.0" text="pormotion">
+                  <Button fx:id="porBt" mnemonicParsing="false" onAction="#pro_screen" prefHeight="31.0" prefWidth="128.0" text="Promotion">
                      <VBox.margin>
                         <Insets top="10.0" />
                      </VBox.margin>
                   </Button>
-                  <Button fx:id="placeBt" mnemonicParsing="false" onAction="#place_book_orders" prefHeight="31.0" prefWidth="128.0" text="place">
+                  <Button fx:id="placeBt" mnemonicParsing="false" onAction="#place_book_orders" prefHeight="31.0" prefWidth="128.0" text="Place Orders">
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </Button>
+                  <Button fx:id="confirmBt" mnemonicParsing="false" onAction="#confirm_book_orders" prefHeight="31.0" prefWidth="128.0" text="Confirm Placed Orders">
                      <VBox.margin>
                         <Insets top="10.0" />
                      </VBox.margin>
@@ -45,12 +50,12 @@
                         <Insets top="10.0" />
                      </VBox.margin>
                   </Button>
-                  <Button fx:id="confirmBt" mnemonicParsing="false" onAction="#confirm_book_orders" prefHeight="31.0" prefWidth="128.0" text="confirm">
+                  <Button fx:id="modifyPub" mnemonicParsing="false" onAction="#addPub" prefHeight="31.0" prefWidth="128.0" text="Add New Publisher">
                      <VBox.margin>
                         <Insets top="10.0" />
                      </VBox.margin>
                   </Button>
-                  <Button fx:id="reportBt" mnemonicParsing="false" onAction="#makeRebort" prefHeight="31.0" prefWidth="128.0" text="report">
+                  <Button fx:id="reportBt" mnemonicParsing="false" onAction="#makeRebort" prefHeight="31.0" prefWidth="128.0" text="Report">
                      <VBox.margin>
                         <Insets top="10.0" />
                      </VBox.margin>

@@ -33,11 +33,7 @@
             <HBox alignment="CENTER" prefHeight="46.0" prefWidth="394.0" spacing="85.0">
                <children>
                   <Label fx:id="authorsText" text="Author:" />
-<<<<<<< HEAD
                   <TextField fx:id="authorText" />
-=======
-                  <TextField fx:id="ISBN1" />
->>>>>>> 46a54620bf89765ddd81a931defe344fdae6b5ab
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="46.0" prefWidth="394.0" spacing="42.0">

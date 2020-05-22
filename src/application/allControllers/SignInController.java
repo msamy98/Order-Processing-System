@@ -67,6 +67,7 @@ public class SignInController {
 		    				mainController.modify.setVisible(true);
 		    				mainController.confirmBt.setVisible(true);
 		    				mainController.reportBt.setVisible(true);
+		    				mainController.modifyPub.setVisible(true);
 		    			}
 		    			else {
 		    				ResultSet r = database.executeRetrieveQuery();
@@ -80,6 +81,7 @@ public class SignInController {
 		    				mainController.modify.setVisible(false);
 		    				mainController.confirmBt.setVisible(false);
 		    				mainController.reportBt.setVisible(false);
+		    				mainController.modifyPub.setVisible(false);
 		    			}
 
 						myStage.setTitle("system");

@@ -70,6 +70,9 @@ public class MainController {
 
     @FXML
     private Label label2;
+    
+    @FXML
+    public Button modifyPub;
 
      private User user;
 
@@ -165,6 +168,20 @@ public class MainController {
     		mainBorderPane.setCenter(p);
     	}catch (IOException e) {
 			e.printStackTrace();
+		}
+    }
+    
+    @FXML
+    void addPub (ActionEvent event) {
+    	FXMLLoader loader = new FXMLLoader(getClass().getResource("/PublisherGUI.fxml"));
+    	Pane p;
+    	try {
+    		p = loader.load();
+    		AddPublisherController addPublisherController = loader.getController();
+    		addPublisherController.setStage(myStage);
+    		mainBorderPane.setCenter(p);
+    	}catch (IOException e) {
+    		e.printStackTrace();
 		}
     }
 

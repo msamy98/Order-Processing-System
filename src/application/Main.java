@@ -20,6 +20,7 @@ public class Main extends Application {
 			Scene scene = new Scene(root);
 			primaryStage.setScene(scene);
 			primaryStage.setResizable(false);
+			primaryStage.setTitle("Sign In");
 			SignInController signInController =fxmlLoader.getController();
 			signInController.setStage(primaryStage);
 			primaryStage.show();

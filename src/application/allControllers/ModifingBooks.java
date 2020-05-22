@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class ModifingBooks {
@@ -103,11 +104,16 @@ public class ModifingBooks {
 				}
 				else {
 					error_msg.setText("Enter all the fields");
+					error_msg.setTextFill(Color.RED);
 					error_msg.setVisible(true);
 				}
 				database.databaseClose();
+				error_msg.setText("Book Added SUCCESSFULLY!!");
+				error_msg.setTextFill(Color.GREEN);
+				error_msg.setVisible(true);
 			}catch (SQLException e) {
 				error_msg.setText(e.getMessage());
+				error_msg.setTextFill(Color.RED);
 				error_msg.setVisible(true);
 				System.out.println(e.getMessage());
 			}
@@ -182,6 +188,9 @@ public class ModifingBooks {
 					database.executeUpdateQuery();
 				}
 				database.databaseClose();
+				error_msg.setText("Book Modified SUCCESSFULLY!!");
+				error_msg.setTextFill(Color.GREEN);
+				error_msg.setVisible(true);
 			}
 			else {
 				error_msg.setText("Specify which book you want to modify!");
@@ -213,10 +222,15 @@ public class ModifingBooks {
 		database.databaseConnector();
 		database.setQuery("SELECT * FROM order_processing_system.publisher;");
 		ResultSet result = database.executeRetrieveQuery();
+		String firstValue = null;
+		boolean stored = false;
 		while(result.next()) {
-		pubList.add(result.getString("PUBLISHER_NAME"));
-		publisher_name.setValue(result.getString("PUBLISHER_NAME"));
+			if(!stored)
+				firstValue = result.getString("PUBLISHER_NAME");
+			pubList.add(result.getString("PUBLISHER_NAME"));
+			stored = true;
 		}
+		publisher_name.setValue(firstValue);
 		publisher_name.setItems(pubList);
 		
     }

@@ -47,6 +47,9 @@ public class SignUpController {
     
     @FXML
     private Label error_msg;
+    
+    @FXML
+    private Button back;
 
     private Database database = new Database();
     private Stage myStage;
@@ -113,6 +116,24 @@ public class SignUpController {
 			error_msg.setVisible(true);
     	}
     	database.databaseClose();
+    }
+    
+    @FXML
+    void backHome(ActionEvent event) {
+    	FXMLLoader loader = new FXMLLoader(getClass().getResource("/SignInGui.fxml"));
+    	Parent parentScene;
+    	try {
+    		parentScene = loader.load();
+    		myStage.setTitle("Sign In");
+    		myStage.setScene(new Scene(parentScene, 350.0D, 350.0D));
+    		myStage.setResizable(false);
+    		SignInController signInController =loader.getController();
+    		signInController.setStage(myStage);
+    		myStage.show();
+    		
+    	}catch (IOException e) {
+    		e.printStackTrace();
+		}
     }
     public Stage getMyStage()
     {

@@ -87,13 +87,16 @@ public class Queries {
 				"                group by book.isbn";
 		return s;
 	}
-    public String searchBookQueryAuthor(String value)
+	public String searchBookQueryAuthor(String value)
     {
-    	String s ="select book.isbn ,  title ,publishing_year, publisher_name , price , quantity ,GROUP_CONCAT(authortable.authorname ) as author, catagory.catagory_name\r\n" +
-				"                from book  , catagory ,authortable\r\n" +
-				"                where book.book_catagory = catagory.id and authortable.authorname= '"+value+"'and book.isbn=authortable.isbn \r\n" +
-				"                group by book.isbn";
-		return s;
+        String s ="select book.isbn ,  title ,publishing_year, publisher_name , price , quantity ,GROUP_CONCAT(authortable.authorname ) as author, catagory.catagory_name\r\n" +
+                "                from book  , catagory ,authortable\r\n" +
+                "                where book.book_catagory = catagory.id and book.isbn in (select isbn"
+                + " from authortable "
+                + "where authorname= \'"+value+"\') and book.isbn=authortable.isbn \r\n" +
+                "                group by book.isbn";
+
+        return s;
     }
 
 
