@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.19, for Win64 (x86_64)
 --
--- Host: localhost    Database: order_processing_system
+-- Host: 127.0.0.1    Database: order_processing_system
 -- ------------------------------------------------------
 -- Server version	8.0.19
 
@@ -36,7 +36,7 @@ CREATE TABLE `publisher` (
 
 LOCK TABLES `publisher` WRITE;
 /*!40000 ALTER TABLE `publisher` DISABLE KEYS */;
-INSERT INTO `publisher` VALUES ('Ziad Taha','Ard El Abtal','011-5537-6877'),('zoom','124Th behind chair factory','2124-5676-8798'),('zoooom','124Th behind chair factory','2124-5676-8798');
+INSERT INTO `publisher` VALUES ('rsla','124Th behind chair factory','2124-5676-8798'),('Ziad Taha','Ard El Abtal','011-5537-6877');
 /*!40000 ALTER TABLE `publisher` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -49,4 +49,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-05-22  1:16:44
+-- Dump completed on 2020-05-22  4:59:58

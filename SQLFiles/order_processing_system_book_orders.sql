@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.19, for Win64 (x86_64)
 --
--- Host: localhost    Database: order_processing_system
+-- Host: 127.0.0.1    Database: order_processing_system
 -- ------------------------------------------------------
 -- Server version	8.0.19
 
@@ -30,7 +30,7 @@ CREATE TABLE `book_orders` (
   PRIMARY KEY (`order_id`,`ISBN`),
   KEY `ISBN` (`ISBN`),
   CONSTRAINT `book_orders_ibfk_1` FOREIGN KEY (`ISBN`) REFERENCES `book` (`ISBN`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -39,7 +39,7 @@ CREATE TABLE `book_orders` (
 
 LOCK TABLES `book_orders` WRITE;
 /*!40000 ALTER TABLE `book_orders` DISABLE KEYS */;
-INSERT INTO `book_orders` VALUES (1,8,'2020-05-21 23:47:26',0);
+INSERT INTO `book_orders` VALUES (1,8,'2020-05-21 23:47:26',1),(2,9,'2020-05-22 03:36:02',0);
 /*!40000 ALTER TABLE `book_orders` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -71,4 +71,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-05-22  1:16:46
+-- Dump completed on 2020-05-22  5:00:01

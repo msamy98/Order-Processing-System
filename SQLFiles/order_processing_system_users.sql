@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.19, for Win64 (x86_64)
 --
--- Host: localhost    Database: order_processing_system
+-- Host: 127.0.0.1    Database: order_processing_system
 -- ------------------------------------------------------
 -- Server version	8.0.19
 
@@ -41,7 +41,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES ('admin','admin','admin','admin','admin.com','0121','victoria',0),('hhh','123','hh','hhh','hh','hh','hhh',1),('jjj','jjj','jjj','jjj','jjj','jjj','jjj',1),('mmm','123','mm','mm','sdaf','012','sf',0),('momen','123','asdf','ahemd','asfd','saf','adsf',0),('mostafa','123','mahoud','mohamed','sss','saf1sa2f','asdf',0),('mostafa2','123','adsf','adsf','asdf','asf','saf',0);
+INSERT INTO `users` VALUES ('admin','admin','admin','admin','admin.com','01234567891','victoria',0),('hhh','123','hh','hhh','hh','hh','hhh',1),('jjj','jjj','jjj','jjj','jjj','jjj','jjj',1),('mmm','123','mm','mm','sdaf','012','sf',1),('momen','123','asdf','ahemd','asfd','saf','adsf',1),('mostafa','123','mahoud','mohamed','sss','saf1sa2f','asdf',0),('mostafa2','123','adsf','adsf','asdf','asf','saf',1);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -54,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-05-22  1:16:45
+-- Dump completed on 2020-05-22  5:00:00
