@@ -37,7 +37,7 @@ public class PromotionController {
     private Database db ;
 
     private Stage myStage;
-    
+
     private  ObservableList<User> proList;
 
 
@@ -53,7 +53,7 @@ public class PromotionController {
 				//System.out.println(s);
 				db.setQuery(s) ;
 				ResultSet userData = db.executeRetrieveQuery() ;
-				ListOfUser(proList , userData) ; 
+				ListOfUser(proList , userData) ;
 				db.databaseClose();
 			} catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException e) {
 				// TODO Auto-generated catch block
@@ -99,10 +99,10 @@ public class PromotionController {
     	myStage =stage;
     	db = new Database() ;
     	//user_name , first_name , last_name , e_mail , shipping_address
-    	
+
     	proList = FXCollections.observableArrayList();
     	userTable.setItems(proList);
-    	
+
         List<TableColumn<User,String>> columnsCart =new ArrayList<TableColumn<User,String>>();
         TableColumn user_name = new TableColumn("user_name");
         user_name.setCellValueFactory(new PropertyValueFactory("userName"));
@@ -112,17 +112,17 @@ public class PromotionController {
 
         TableColumn last_name = new TableColumn("last_name");
         last_name.setCellValueFactory(new PropertyValueFactory("lastName"));
-        
-      
+
+
         TableColumn e_mail = new TableColumn("e_mail");
         e_mail.setCellValueFactory(new PropertyValueFactory("email"));
-        
+
         TableColumn shipping_address = new TableColumn("shipping_address");
         shipping_address.setCellValueFactory(new PropertyValueFactory("ShippingAddress"));
 
 
 
-       
+
         columnsCart.add(user_name);
         columnsCart.add(first_name);
         columnsCart.add(last_name) ;
@@ -130,7 +130,7 @@ public class PromotionController {
         columnsCart.add(shipping_address);
 
         userTable.getColumns().setAll(columnsCart);
-        
+
         try {
 			db.databaseConnector();
 			Queries q = new Queries() ;
@@ -138,20 +138,20 @@ public class PromotionController {
 			//System.out.println(s);
 			db.setQuery(s) ;
 			ResultSet userData = db.executeRetrieveQuery() ;
-			ListOfUser(proList , userData) ; 
+			ListOfUser(proList , userData) ;
 			db.databaseClose();
 		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
     }
-    
+
     private void ListOfUser(ObservableList<User> proList , ResultSet userData  ) throws SQLException {
-    	
+
     	proList.clear();
         ResultSetMetaData metaData = userData.getMetaData();
         while(userData.next()) {
-        	User u = new User() ; 
+        	User u = new User(userData) ;
             for(int i=1 ; i<=metaData.getColumnCount() ; i++) {
                 switch (i) {
                 case 1: //System.out.println(userData.getString(i));
@@ -169,18 +169,18 @@ public class PromotionController {
                     break;
                 }
             }
-            proList.add(u) ; 
+            proList.add(u) ;
         }
-        
-    	
+
+
     }
-    
+
     /* private void ListOfUser(ObservableList<User> proList , ResultSet userData  ) throws SQLException {
-    	
+
 
         ResultSetMetaData metaData = userData.getMetaData();
         while(userData.next()) {
-        	User u = new User() ; 
+        	User u = new User() ;
             for(int i=1 ; i<=metaData.getColumnCount() ; i++) {
                 switch (i) {
                 case 1: //System.out.println(userData.getString(i));
@@ -204,13 +204,13 @@ public class PromotionController {
                     break;
                 }
             }
-            proList.add(u) ; 
+            proList.add(u) ;
         }
-        
-    	
+
+
     }
     */
-    
-    
+
+
 
 }

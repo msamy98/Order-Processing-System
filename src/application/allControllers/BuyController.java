@@ -17,7 +17,10 @@ import javafx.stage.Stage;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import com.mysql.fabric.xmlrpc.base.Array;
@@ -25,6 +28,7 @@ import com.mysql.fabric.xmlrpc.base.Array;
 import application.Book;
 import application.Database;
 import application.Queries;
+import application.User;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -84,6 +88,7 @@ public class BuyController {
 	private Database db;
     private String last_search="";
     private String last_cat="";
+    private User user;
 
 	@FXML
 	void minus(ActionEvent event) {
@@ -233,11 +238,17 @@ public class BuyController {
 		try {
 			error_msg.setVisible(false);
 			db.databaseConnector();
-			Queries q = new Queries();
+			Calendar cal = Calendar.getInstance();
+            String timeStamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Timestamp(cal.getTimeInMillis()));
+			System.out.println(timeStamp+" "+ user.getUserName());
+            Queries q = new Queries();
 			for (Book b : cart) {
 				db.setQuery(q.checkOutCart(b.getISBN(), b.getNoOfCopiesInCart()));
 				db.executeUpdateQuery();
+				db.setQuery(q.checkOutCart(b.getISBN(),timeStamp,user.getUserName(), b.getNoOfCopiesInCart()));
+				db.executeUpdateQuery();
 			}
+
 			db.databaseClose();
 			cart.clear();
 			price.setText("0");
@@ -418,5 +429,11 @@ public class BuyController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	public void setUser(User user)
+	{
+		System.out.println(user.getUserName());
+		System.out.println(user.getUserType());
+		this.user=user;
 	}
 }

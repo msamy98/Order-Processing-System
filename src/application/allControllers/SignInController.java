@@ -32,10 +32,10 @@ public class SignInController {
 
     @FXML
     private Hyperlink sign_up_link;
-    
+
     @FXML
     private Label error_msg;
-    
+
 
     private Stage myStage;
 
@@ -45,11 +45,11 @@ public class SignInController {
     	database.databaseConnector();
     	database.setQuery("SELECT * FROM order_processing_system.users WHERE user_name = " + "\'" + user_name.getText() + "\'" + ";");
     	ResultSet result = database.executeRetrieveQuery();
-    	
+
     	if(result.next() ) {
     		if(!org.apache.commons.lang3.StringUtils.isBlank(user_name.getText())) {
 	    		if(pass_word.getText().toString().equals(result.getString("pass_word").toString())) {
-	    			
+
 			    	FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/MainScreen.fxml"));
 					Parent root;
 					try {
@@ -57,6 +57,7 @@ public class SignInController {
 						MainController mainController = fxmlLoader.getController();
 						if(result.getInt("user_type") == 0) {
 		    				Manger manger = new Manger(result);
+		    				System.out.println(manger.getUserName());
 		    				mainController.setUser(manger);
 		    				result.previous();
 		    				mainController.label1.setText("WELCOME " + result.getString("first_name")+" " + result.getString("last_name")+ " TO OUR");
@@ -78,7 +79,7 @@ public class SignInController {
 		    				mainController.confirmBt.setVisible(false);
 		    				mainController.reportBt.setVisible(false);
 		    			}
-						
+
 						myStage.setTitle("system");
 						myStage.setScene(new Scene(root, 1050.0D, 600.0D));
 						myStage.setResizable(false);
